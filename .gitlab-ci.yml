@@ -1,0 +1,21 @@
+variables:
+  GIT_SSL_NO_VERIFY: "true"
+
+.get-deps: &get-deps |
+  # This is a shell multi-line script to be included
+  for dep in $(cat go_deps);
+    do /usr/local/go/bin/go get $dep;
+  done
+
+
+deploy to stage:
+  environment: stage
+  script:
+    - *get-deps
+    - sudo go build main.go
+    - sudo rm -Rf /var/www/sweethome/backend/*
+    - sudo rsync -a main static /var/www/sweethome/backend
+    - sudo rsync -a static/env_config_template.json /var/www/sweethome/backend/static/env_config.json
+    - sudo systemctl restart sweethome-backend
+  only:
+    - master
