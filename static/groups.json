@@ -1,0 +1,1 @@
+{ "groups": [{"name": "main", "id": "1", "files": [{"name":"file1.zip", "id":"1"},{"name":"file2", "id":"2"}]},{"name": "other", "id":"2", "files": []},{"name": "photo","id":"3", "files":[]}]}
