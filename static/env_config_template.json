@@ -1,0 +1,10 @@
+{
+  "postgres_host":"localhost",
+  "postgres_port":"5436",
+  "postgres_user":"psh2",
+  "postgres_password":"homepassword123",
+  "postgres_base":"sweethome",
+  "http_port": "3100",
+  "telegram_bot": ""
+}
+
