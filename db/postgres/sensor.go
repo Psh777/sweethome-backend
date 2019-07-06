@@ -25,3 +25,14 @@ func NewData(sensor types.Sensor) error {
 	return nil
 
 }
+
+func GetData(sensorId string) ([]types.SensorData, error) {
+	fmt.Println("get data: ", sensorId)
+	data := make([]types.SensorData, 0)
+	err := DBX.Select(&data, "SELECT *, ROUND(extract(epoch from timestamp::timestamp with time zone) * 1000) as timestamp_int FROM sensors_data WHERE sensor_id = $1 ORDER BY id DESC LIMIT 100;", sensorId)
+	if err != nil {
+		fmt.Println("get Data: ", err)
+		return nil, err
+	}
+	return data, nil
+}
