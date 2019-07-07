@@ -14,9 +14,14 @@ func sensorUploadHandler(w http.ResponseWriter, r *http.Request) {
 	sensor.Upload(w,r)
 }
 
+func getSensorHandler(w http.ResponseWriter, r *http.Request) {
+	sensor.GetSensors(w,r)
+}
+
 func sensorGetDataHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.URL.Query().Get(":id")
-	sensor.GetDataSensor(w,r, id)
+	t := r.URL.Query().Get(":type")
+	sensor.GetDataSensor(w,r, id, t)
 }
 
 
