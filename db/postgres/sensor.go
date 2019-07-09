@@ -26,10 +26,19 @@ func NewData(sensor types.Sensor) error {
 
 }
 
-func GetData(sensorId string, sensorType int) ([]types.SensorData, error) {
-	fmt.Println("get data: ", sensorId)
+func GetDataByType(sensorId string, sensorType int) ([]types.SensorData, error) {
 	data := make([]types.SensorData, 0)
 	err := DBX.Select(&data, "SELECT *, ROUND(extract(epoch from timestamp::timestamp with time zone) * 1000) as timestamp_int FROM sensors_data WHERE sensor_id = $1 AND sensor_type = $2 ORDER BY id DESC LIMIT 1440;", sensorId, sensorType)
+	if err != nil {
+		fmt.Println("get Data: ", err)
+		return nil, err
+	}
+	return data, nil
+}
+
+func GetDataByRequestID(requestID string) ([]types.SensorData, error) {
+	data := make([]types.SensorData, 0)
+	err := DBX.Select(&data, "SELECT *, ROUND(extract(epoch from timestamp::timestamp with time zone) * 1000) as timestamp_int FROM sensors_data WHERE request_id = $1 ORDER BY sensor_type DESC LIMIT 1440;", requestID)
 	if err != nil {
 		fmt.Println("get Data: ", err)
 		return nil, err
@@ -43,6 +52,21 @@ func GetSensors() ([]types.Sensor, error) {
 	err := DBX.Select(&data, "SELECT * FROM sensors;")
 	if err != nil {
 		fmt.Println("get Sensors: ", err)
+		return nil, err
+	}
+	return data, nil
+}
+
+func GetLastData(sensorId string) ([]types.SensorData, error) {
+	sens := types.Sensor{}
+	err := DBX.Get(&sens, "SELECT * FROM sensors WHERE id = $1;", sensorId)
+	if err != nil {
+		fmt.Println("get last data: ", err)
+		return nil, err
+	}
+	data, err := GetDataByRequestID(sens.RequestID)
+	if err != nil {
+		fmt.Println("get last data: ", err)
 		return nil, err
 	}
 	return data, nil

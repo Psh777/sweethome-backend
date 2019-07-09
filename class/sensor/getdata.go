@@ -22,7 +22,7 @@ func GetDataSensor(w http.ResponseWriter, _ *http.Request, sensorId string, sens
 		return
 	}
 
-	data, err := postgres.GetData(sensorId, int(sensorTypeInt))
+	data, err := postgres.GetDataByType(sensorId, int(sensorTypeInt))
 	if err != nil {
 		handlers.HandlerError(w, err.Error())
 		return
@@ -30,9 +30,16 @@ func GetDataSensor(w http.ResponseWriter, _ *http.Request, sensorId string, sens
 
 	sort.Sort(types.SensorDataByTime(data))
 
-	handlers.HandlerInterface(w, DataOut{Data: data})
+	lastData, err := postgres.GetLastData(sensorId)
+	if err != nil {
+		handlers.HandlerError(w, err.Error())
+		return
+	}
+
+	handlers.HandlerInterface(w, DataOut{Data: data, LastData: lastData})
 }
 
 type DataOut struct {
-	Data []types.SensorData `json:"data"`
+	Data     []types.SensorData `json:"data"`
+	LastData []types.SensorData `json:"last_data"`
 }
