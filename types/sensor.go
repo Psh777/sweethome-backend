@@ -20,3 +20,10 @@ type SensorData struct {
 	TimeStampFormat string  `json:"timestamp_format"  db:"timestamp"`
 	RequestID       string  `json:"request_id"        db:"request_id"`
 }
+
+
+type SensorDataByTime []SensorData
+
+func (a SensorDataByTime) Len() int           { return len(a) }
+func (a SensorDataByTime) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a SensorDataByTime) Less(i, j int) bool { return a[i].ID < a[j].ID }

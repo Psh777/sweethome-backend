@@ -6,9 +6,10 @@ import (
 	"../../webserver/handlers"
 	valid "github.com/asaskevich/govalidator"
 	"net/http"
+	"sort"
 )
 
-func GetDataSensor(w http.ResponseWriter, r *http.Request, sensorId string, sensorType string) {
+func GetDataSensor(w http.ResponseWriter, _ *http.Request, sensorId string, sensorType string) {
 
 	sensorTypeInt, err := valid.ToInt(sensorType)
 	if err != nil {
@@ -26,6 +27,8 @@ func GetDataSensor(w http.ResponseWriter, r *http.Request, sensorId string, sens
 		handlers.HandlerError(w, err.Error())
 		return
 	}
+
+	sort.Sort(types.SensorDataByTime(data))
 
 	handlers.HandlerInterface(w, DataOut{Data: data})
 }
