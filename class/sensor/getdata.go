@@ -36,6 +36,8 @@ func GetDataSensor(w http.ResponseWriter, _ *http.Request, sensorId string, sens
 		return
 	}
 
+	sort.Sort(types.SensorDataByType(lastData))
+
 	handlers.HandlerInterface(w, DataOut{Data: data, LastData: lastData})
 }
 

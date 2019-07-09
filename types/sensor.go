@@ -27,3 +27,9 @@ type SensorDataByTime []SensorData
 func (a SensorDataByTime) Len() int           { return len(a) }
 func (a SensorDataByTime) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a SensorDataByTime) Less(i, j int) bool { return a[i].ID < a[j].ID }
+
+type SensorDataByType []SensorData
+
+func (a SensorDataByType) Len() int           { return len(a) }
+func (a SensorDataByType) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a SensorDataByType) Less(i, j int) bool { return a[i].Type < a[j].Type }
