@@ -28,7 +28,7 @@ func NewData(sensor types.Sensor) error {
 
 func GetDataByType(sensorId string, sensorType int) ([]types.SensorData, error) {
 	data := make([]types.SensorData, 0)
-	err := DBX.Select(&data, "SELECT *, ROUND(extract(epoch from timestamp::timestamp with time zone) * 1000) as timestamp_int FROM sensors_data WHERE sensor_id = $1 AND sensor_type = $2 ORDER BY id DESC LIMIT 1440;", sensorId, sensorType)
+	err := DBX.Select(&data, "SELECT *, ROUND(extract(epoch from timestamp::timestamp with time zone) * 1000) as timestamp_int FROM sensors_data WHERE sensor_id = $1 AND sensor_type = $2 ORDER BY id DESC LIMIT 50;", sensorId, sensorType)
 	if err != nil {
 		fmt.Println("get Data: ", err)
 		return nil, err
@@ -38,7 +38,7 @@ func GetDataByType(sensorId string, sensorType int) ([]types.SensorData, error) 
 
 func GetDataByRequestID(requestID string) ([]types.SensorData, error) {
 	data := make([]types.SensorData, 0)
-	err := DBX.Select(&data, "SELECT *, ROUND(extract(epoch from timestamp::timestamp with time zone) * 1000) as timestamp_int FROM sensors_data WHERE request_id = $1 ORDER BY sensor_type DESC LIMIT 1440;", requestID)
+	err := DBX.Select(&data, "SELECT *, ROUND(extract(epoch from timestamp::timestamp with time zone) * 1000) as timestamp_int FROM sensors_data WHERE request_id = $1 ORDER BY sensor_type DESC LIMIT 50;", requestID)
 	if err != nil {
 		fmt.Println("get Data: ", err)
 		return nil, err
