@@ -18,7 +18,8 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	log.Println(string(body))
 
 	if r.Body == nil {
-		http.Error(w, "Please send a request body", 400)
+		fmt.Println("error: no body")
+		handlers.HandlerError(w, "No body")
 		return
 	}
 
@@ -27,13 +28,16 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	b, err := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		fmt.Println("error: "+ err.Error())
+		handlers.HandlerError(w, err.Error())
 		return
 	}
 
 	err = json.Unmarshal(b, &t)
 	//err = json.NewDecoder(r.Body).Decode(&t)
 	if err != nil {
+		fmt.Println()
+		fmt.Println("error: "+ err.Error())
 		handlers.HandlerError(w, err.Error())
 		return
 	}
