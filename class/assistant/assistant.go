@@ -5,17 +5,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 )
 
 func ParseJson(w http.ResponseWriter, r *http.Request) {
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		handlers.HandlerError(w, "1)"+err.Error())
-		return
-	}
-	log.Println(string(body))
+	//body, err := ioutil.ReadAll(r.Body)
+	//if err != nil {
+	//	handlers.HandlerError(w, "1)"+err.Error())
+	//	return
+	//}
+	//log.Println(string(body))
 
 	if r.Body == nil {
 		fmt.Println("error: no body")
