@@ -36,6 +36,16 @@ func GetDataByType(sensorId string, sensorType int) ([]types.SensorData, error) 
 	return data, nil
 }
 
+func GetDataByTypeActually(sensorId string, sensorType int) (float64, error) {
+	var data float64
+	err := DBX.Get(&data, "SELECT *, ROUND(extract(epoch from timestamp::timestamp with time zone) * 1000) as timestamp_int FROM sensors_data WHERE sensor_id = $1 AND sensor_type = $2 ORDER BY id DESC LIMIT 1;", sensorId, sensorType)
+	if err != nil {
+		fmt.Println("get Data: ", err)
+		return 0, err
+	}
+	return data, nil
+}
+
 func GetDataByRequestID(requestID string) ([]types.SensorData, error) {
 	data := make([]types.SensorData, 0)
 	err := DBX.Select(&data, "SELECT *, ROUND(extract(epoch from timestamp::timestamp with time zone) * 1000) as timestamp_int FROM sensors_data WHERE request_id = $1 ORDER BY sensor_type DESC LIMIT 50;", requestID)
@@ -71,3 +81,4 @@ func GetLastData(sensorId string) ([]types.SensorData, error) {
 	}
 	return data, nil
 }
+

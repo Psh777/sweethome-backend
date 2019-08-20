@@ -24,6 +24,13 @@ func sensorGetDataHandler(w http.ResponseWriter, r *http.Request) {
 	sensor.GetDataSensor(w,r, id, t)
 }
 
+func sensorPostDataHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.URL.Query().Get(":id")
+	t := r.URL.Query().Get(":type")
+	sensor.PostDataSensor(w,r, id, t)
+}
+
+
 
 
 

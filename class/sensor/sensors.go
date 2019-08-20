@@ -18,6 +18,7 @@ func GetSensors(w http.ResponseWriter, _ *http.Request) {
 	})
 }
 
+
 type SensorsOut struct {
 	Sensors []types.Sensor `json:"sensors"`
 }
