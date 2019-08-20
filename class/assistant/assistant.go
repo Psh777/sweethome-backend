@@ -22,8 +22,8 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	var t request
 	err1 := decoder.Decode(&t)
 	if err1 != nil {
-		handlers.HandlerError(w, "2)" + err1.Error())
-		return
+		//handlers.HandlerError(w, "2)" + err1.Error())
+		//return
 	}
 	fmt.Printf("%+v\n", t.Text)
 	handlers.HandlerInterface(w, "ok")
