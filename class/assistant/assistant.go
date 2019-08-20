@@ -15,10 +15,10 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	//fmt.Printf("%+v\n", t)
+	fmt.Printf("%+v\n", t.Text)
 	handlers.HandlerInterface(w, "ok")
 }
 
 type request struct {
-
+	Text string `json:"text"`
 }
