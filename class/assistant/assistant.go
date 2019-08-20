@@ -42,7 +42,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Printf("%+v\n", t)
 
-	t1 := make([]string, 1)
+	t1 := make([]string, 0)
 	t1 = append(t1, "text")
 	t2 := make([]FulfillmentMessages, 0)
 	var f1 FulfillmentMessages
