@@ -54,7 +54,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		FulfillmentMessages: t2,
 	}
 
-	handlers.HandlerInterface(w, answer)
+	handlers.HandlerInterfaceAssistant(w, answer)
 }
 
 type request struct {

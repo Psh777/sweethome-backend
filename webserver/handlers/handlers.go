@@ -50,6 +50,12 @@ func HandlerInterface(w http.ResponseWriter, data interface{}) {
 	_, _ = w.Write(Json)
 }
 
+func HandlerInterfaceAssistant(w http.ResponseWriter, data interface{}) {
+	w = Headers(w)
+	Json, _ := json.Marshal(data)
+	_, _ = w.Write(Json)
+}
+
 func HandlerInterfaceError(w http.ResponseWriter, data interface{}) {
 	w = Headers(w)
 	out := Success{
