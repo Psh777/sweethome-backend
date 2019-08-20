@@ -17,14 +17,18 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Println(string(body))
 
-	decoder := json.NewDecoder(r.Body)
-	fmt.Printf("//// %+v //// %+v \n", r.Body, decoder)
-	var t request
-	err1 := decoder.Decode(&t)
-	if err1 != nil {
-		//handlers.HandlerError(w, "2)" + err1.Error())
-		//return
+	if r.Body == nil {
+		http.Error(w, "Please send a request body", 400)
+		return
 	}
+
+	var t request
+	err = json.NewDecoder(r.Body).Decode(&t)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
 	fmt.Printf("%+v\n", t)
 	handlers.HandlerInterface(w, "ok")
 }
