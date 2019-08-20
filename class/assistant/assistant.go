@@ -23,9 +23,18 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var t request
-	err = json.NewDecoder(r.Body).Decode(&t)
+
+	b, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
 	if err != nil {
-		http.Error(w, err.Error(), 400)
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	err = json.Unmarshal(b, &t)
+	//err = json.NewDecoder(r.Body).Decode(&t)
+	if err != nil {
+		handlers.HandlerError(w, err.Error())
 		return
 	}
 
