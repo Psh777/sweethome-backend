@@ -20,7 +20,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 	fmt.Printf("//// %+v //// %+v \n", r.Body, decoder)
 	var t request
-	err := decoder.Decode(&t)
+	err = decoder.Decode(&t)
 	if err != nil {
 		return
 	}
