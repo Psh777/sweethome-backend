@@ -17,6 +17,7 @@ func Init(myConfig types.MyConfig) {
 	router.Get("/sensor/:id/type/:type", http.HandlerFunc(sensorGetDataHandler))
 	router.Post("/sensor/upload", http.HandlerFunc(sensorUploadHandler))
 
+	router.Get("/assistant", http.HandlerFunc(assistantPostHandler))
 	router.Post("/assistant", http.HandlerFunc(assistantPostHandler))
 
 	fmt.Println("====================================================")
