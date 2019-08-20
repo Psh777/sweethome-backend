@@ -2,6 +2,7 @@ package webserver
 
 import (
 	"../class/sensor"
+	"../class/assistant"
 	"./handlers"
 	"net/http"
 )
@@ -30,6 +31,9 @@ func sensorPostDataHandler(w http.ResponseWriter, r *http.Request) {
 	sensor.PostDataSensor(w,r, id, t)
 }
 
+func assistantPostHandler(w http.ResponseWriter, r *http.Request) {
+	assistant.ParseJson(w,r)
+}
 
 
 

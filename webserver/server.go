@@ -17,7 +17,7 @@ func Init(myConfig types.MyConfig) {
 	router.Get("/sensor/:id/type/:type", http.HandlerFunc(sensorGetDataHandler))
 	router.Post("/sensor/upload", http.HandlerFunc(sensorUploadHandler))
 
-	router.Post("/sensor/:id/type/:type", http.HandlerFunc(sensorPostDataHandler))
+	router.Post("/assistant", http.HandlerFunc(assistantPostHandler))
 
 	fmt.Println("====================================================")
 	fmt.Println("ListenAndServe : " + myConfig.Env.HttpPort)
