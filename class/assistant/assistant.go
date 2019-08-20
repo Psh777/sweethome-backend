@@ -12,7 +12,7 @@ import (
 func ParseJson(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		handlers.HandlerError(w, "1)" + err.Error())
+		handlers.HandlerError(w, "1)"+err.Error())
 		return
 	}
 	log.Println(string(body))
@@ -25,10 +25,20 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		//handlers.HandlerError(w, "2)" + err1.Error())
 		//return
 	}
-	fmt.Printf("%+v\n", t.Text)
+	fmt.Printf("%+v\n", t)
 	handlers.HandlerInterface(w, "ok")
 }
 
 type request struct {
-	Text string `json:"text"`
+	ResponseId  string      `json:"responseId"`
+	QueryResult QueryResult `json:"queryResult"`
+}
+
+type QueryResult struct {
+	QueryText  string     `json:"queryText"`
+	Action     string     `json:"action"`
+	Parameters Parameters `json:"parameters"`
+}
+
+type Parameters struct {
 }
