@@ -12,8 +12,8 @@ import (
 func ParseJson(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
+		handlers.HandlerError(w, err.Error())
 		return
-		//panic(err)
 	}
 	log.Println(string(body))
 
@@ -22,6 +22,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	var t request
 	err = decoder.Decode(&t)
 	if err != nil {
+		handlers.HandlerError(w, err.Error())
 		return
 	}
 	fmt.Printf("%+v\n", t.Text)
