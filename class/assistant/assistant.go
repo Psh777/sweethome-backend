@@ -72,7 +72,7 @@ type Parameters struct {
 }
 
 type answer struct {
-	FulfillmentText     string                `json:"fulfillment_text"`
+	FulfillmentText     string                `json:"fulfillmentText"`
 	FulfillmentMessages []FulfillmentMessages `json:"fulfillmentMessages"`
 }
 
