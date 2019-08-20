@@ -38,7 +38,7 @@ func GetDataByType(sensorId string, sensorType int) ([]types.SensorData, error) 
 
 func GetDataByTypeActually(sensorId string, sensorType int) (float64, error) {
 	var data float64
-	err := DBX.Get(&data, "SELECT *, ROUND(extract(epoch from timestamp::timestamp with time zone) * 1000) as timestamp_int FROM sensors_data WHERE sensor_id = $1 AND sensor_type = $2 ORDER BY id DESC LIMIT 1;", sensorId, sensorType)
+	err := DBX.Get(&data, "SELECT sensor_value FROM sensors_data WHERE sensor_id = $1 AND sensor_type = $2 ORDER BY id DESC LIMIT 1;", sensorId, sensorType)
 	if err != nil {
 		fmt.Println("get Data: ", err)
 		return 0, err
