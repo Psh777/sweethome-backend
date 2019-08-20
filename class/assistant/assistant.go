@@ -27,22 +27,34 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	b, err := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 	if err != nil {
-		fmt.Println("error: "+ err.Error())
+		fmt.Println("error: " + err.Error())
 		handlers.HandlerError(w, err.Error())
 		return
 	}
 
 	err = json.Unmarshal(b, &t)
-	//err = json.NewDecoder(r.Body).Decode(&t)
 	if err != nil {
 		fmt.Println()
-		fmt.Println("error: "+ err.Error())
+		fmt.Println("error: " + err.Error())
 		handlers.HandlerError(w, err.Error())
 		return
 	}
 
 	fmt.Printf("%+v\n", t)
-	handlers.HandlerInterface(w, "ok")
+
+	t1 := make([]string, 1)
+	t1 = append(t1, "text")
+	t2 := make([]FulfillmentMessages, 0)
+	var f1 FulfillmentMessages
+	f1.Text = t1
+	t2 = append(t2, f1)
+
+	answer := answer{
+		FulfillmentText:     "hello",
+		FulfillmentMessages: t2,
+	}
+
+	handlers.HandlerInterface(w, answer)
 }
 
 type request struct {
@@ -57,4 +69,13 @@ type QueryResult struct {
 }
 
 type Parameters struct {
+}
+
+type answer struct {
+	FulfillmentText     string                `json:"fulfillment_text"`
+	FulfillmentMessages []FulfillmentMessages `json:"fulfillmentMessages"`
+}
+
+type FulfillmentMessages struct {
+	Text []string `json:"text"`
 }
