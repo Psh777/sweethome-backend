@@ -45,7 +45,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		str := fmt.Sprintf("%f", data)
+		str := fmt.Sprintf("%.0f", data) + " градусов"
 		CreateResponse(w, str, str)
 
 	case "":
