@@ -83,3 +83,4 @@ type Parameters struct {
 	TypeSensor string `json:"type-sensor"`
 	Room       string `json:"room"`
 }
+
