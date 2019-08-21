@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 )
 
 func ParseJson(w http.ResponseWriter, r *http.Request) {
@@ -38,26 +39,33 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%+v\n", t)
 
 	switch t.QueryResult.Action {
-	case "multisensor-1-temp":
+	case "multisensor":
 
-		data, err := postgres.GetDataByTypeActually("ebaeecf4-58a1-48f0-8f10-c8c926aaa6c9", 1)
+		intTypeSensor, err := strconv.Atoi(t.QueryResult.Parameters.TypeSensor)
 		if err != nil {
 			return
 		}
 
-		str := fmt.Sprintf("%.0f", data) + " градусов"
-		CreateResponse(w, str, str)
-
-	case "multisensor-1-hum":
-		data, err := postgres.GetDataByTypeActually("ebaeecf4-58a1-48f0-8f10-c8c926aaa6c9", 2)
+		data, err := postgres.GetDataByTypeActually(t.QueryResult.Parameters.Room, intTypeSensor)
 		if err != nil {
 			return
 		}
 
-		str := fmt.Sprintf("%.0f", data) + " процентов"
+		var prefix string
+
+		switch intTypeSensor {
+		case 1: prefix = "градусов"
+		case 2: prefix = "процентов"
+		case 3: prefix = "едениц ртутного столба"
+		case 5: prefix = "ппм"
+		}
+
+		str := fmt.Sprintf("%.0f", data) + prefix
 		CreateResponse(w, str, str)
+
+	case "light":
+		CreateResponse(w, "На данный момент не доступно", "На данный момент не доступно")
 	}
-
 }
 
 type request struct {
@@ -72,4 +80,6 @@ type QueryResult struct {
 }
 
 type Parameters struct {
+	TypeSensor string `json:"type_sensor"`
+	Room       string `json:"room"`
 }
