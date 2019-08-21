@@ -48,8 +48,14 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		str := fmt.Sprintf("%.0f", data) + " градусов"
 		CreateResponse(w, str, str)
 
-	case "":
-		fmt.Println("hm")
+	case "multisensor-1-hum":
+		data, err := postgres.GetDataByTypeActually("ebaeecf4-58a1-48f0-8f10-c8c926aaa6c9", 2)
+		if err != nil {
+			return
+		}
+
+		str := fmt.Sprintf("%.0f", data) + " процентов"
+		CreateResponse(w, str, str)
 	}
 
 }
