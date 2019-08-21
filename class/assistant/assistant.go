@@ -42,16 +42,42 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Printf("%+v\n", t)
 
-	t1 := make([]string, 0)
-	t1 = append(t1, "text")
-	t2 := make([]FulfillmentMessages, 0)
-	var f1 FulfillmentMessages
-	f1.Text = t1
-	t2 = append(t2, f1)
+	//t1 := make([]string, 0)
+	//t1 = append(t1, "text")
+	//t2 := make([]FulfillmentMessages, 0)
+	//var f1 FulfillmentMessages
+	//f1.Text = t1
+	//t2 = append(t2, f1)
+
+	simpleResponse := SimpleResponse{
+		TextToSpeech: "hello",
+		DisplayText:  "hello",
+	}
+
+	item := Items{
+		SimpleResponse: simpleResponse,
+	}
+
+	items := make([]Items, 0)
+	items = append(items, item)
+
+	richResponse := RichResponse{
+		Items: items,
+	}
+
+	google := Google{
+		ExpectUserResponse: true,
+		RichResponse:       richResponse,
+	}
+
+	payload := Payload{
+		Google: google,
+	}
 
 	answer := answer{
-		FulfillmentText:     "hello",
-		FulfillmentMessages: t2,
+		Payload: payload,
+		//FulfillmentText:     "hello",
+		//FulfillmentMessages: t2,
 	}
 
 	handlers.HandlerInterfaceAssistant(w, answer)
@@ -72,10 +98,32 @@ type Parameters struct {
 }
 
 type answer struct {
-	FulfillmentText     string                `json:"fulfillmentText"`
-	FulfillmentMessages []FulfillmentMessages `json:"fulfillmentMessages"`
+	Payload Payload `json:"payload"`
+	//FulfillmentText     string                `json:"fulfillmentText"`
+	//FulfillmentMessages []FulfillmentMessages `json:"fulfillmentMessages"`
 }
 
+type Payload struct {
+	Google Google `json:"google"`
+}
+
+type Google struct {
+	ExpectUserResponse bool         `json:"expectUserResponse"`
+	RichResponse       RichResponse `json:"richResponse"`
+}
+
+type RichResponse struct {
+	Items []Items `json:"items"`
+}
+
+type Items struct {
+	SimpleResponse SimpleResponse `json:"simpleResponse"`
+}
+
+type SimpleResponse struct {
+	TextToSpeech string `json:"textToSpeech"`
+	DisplayText  string `json:"displayText"`
+}
 type FulfillmentMessages struct {
 	Text []string `json:"text"`
 }
