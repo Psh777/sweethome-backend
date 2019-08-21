@@ -1,6 +1,7 @@
 package assistant
 
 import (
+	"../../db/postgres"
 	"../../webserver/handlers"
 	"encoding/json"
 	"fmt"
@@ -9,12 +10,6 @@ import (
 )
 
 func ParseJson(w http.ResponseWriter, r *http.Request) {
-	//body, err := ioutil.ReadAll(r.Body)
-	//if err != nil {
-	//	handlers.HandlerError(w, "1)"+err.Error())
-	//	return
-	//}
-	//log.Println(string(body))
 
 	if r.Body == nil {
 		fmt.Println("error: no body")
@@ -42,46 +37,21 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Printf("%+v\n", t)
 
-	t1 := make([]string, 0)
-	t1 = append(t1, "text")
-	t2 := make([]FulfillmentMessages, 0)
-	var f1 FulfillmentMessages
-	f1.Text = t1
-	t2 = append(t2, f1)
+	switch t.QueryResult.Action {
+	case "multisensor-1-temp":
 
-	simpleResponse := SimpleResponse{
-		TextToSpeech: "hello speech",
-		DisplayText:  "hello display text",
+		data, err := postgres.GetDataByTypeActually("ebaeecf4-58a1-48f0-8f10-c8c926aaa6c9", 1)
+		if err != nil {
+			return
+		}
+
+		str := fmt.Sprintf("%f", data)
+		CreateResponse(w, str, str)
+
+	case "":
+		fmt.Println("hm")
 	}
 
-	item := Items{
-		SimpleResponse: simpleResponse,
-	}
-
-	items := make([]Items, 0)
-	items = append(items, item)
-
-	richResponse := RichResponse{
-		Items: items,
-	}
-
-	google := Google{
-		ExpectUserResponse: true,
-		RichResponse:       richResponse,
-	}
-
-	payload := Payload{
-		Google: google,
-	}
-
-	answer := answer{
-		Payload:             payload,
-		//FulfillmentText:     "hello",
-		//FulfillmentMessages: t2,
-		Response:            "hello response",
-	}
-
-	handlers.HandlerInterfaceAssistant(w, answer)
 }
 
 type request struct {
@@ -96,36 +66,4 @@ type QueryResult struct {
 }
 
 type Parameters struct {
-}
-
-type answer struct {
-	Payload             Payload               `json:"payload"`
-	FulfillmentText     string                `json:"fulfillmentText"`
-	FulfillmentMessages []FulfillmentMessages `json:"fulfillmentMessages"`
-	Response            string                `json:"response"`
-}
-
-type Payload struct {
-	Google Google `json:"google"`
-}
-
-type Google struct {
-	ExpectUserResponse bool         `json:"expectUserResponse"`
-	RichResponse       RichResponse `json:"richResponse"`
-}
-
-type RichResponse struct {
-	Items []Items `json:"items"`
-}
-
-type Items struct {
-	SimpleResponse SimpleResponse `json:"simpleResponse"`
-}
-
-type SimpleResponse struct {
-	TextToSpeech string `json:"textToSpeech"`
-	DisplayText  string `json:"displayText"`
-}
-type FulfillmentMessages struct {
-	Text []string `json:"text"`
 }
