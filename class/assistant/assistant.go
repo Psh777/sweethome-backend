@@ -80,6 +80,6 @@ type QueryResult struct {
 }
 
 type Parameters struct {
-	TypeSensor string `json:"type_sensor"`
+	TypeSensor string `json:"type-sensor"`
 	Room       string `json:"room"`
 }
