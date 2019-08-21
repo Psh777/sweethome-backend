@@ -76,8 +76,9 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 
 	answer := answer{
 		Payload:             payload,
-		FulfillmentText:     "hello",
-		FulfillmentMessages: t2,
+		//FulfillmentText:     "hello",
+		//FulfillmentMessages: t2,
+		Response:            "hello",
 	}
 
 	handlers.HandlerInterfaceAssistant(w, answer)
@@ -101,6 +102,7 @@ type answer struct {
 	Payload             Payload               `json:"payload"`
 	FulfillmentText     string                `json:"fulfillmentText"`
 	FulfillmentMessages []FulfillmentMessages `json:"fulfillmentMessages"`
+	Response            string                `json:"response"`
 }
 
 type Payload struct {
