@@ -42,12 +42,12 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Printf("%+v\n", t)
 
-	//t1 := make([]string, 0)
-	//t1 = append(t1, "text")
-	//t2 := make([]FulfillmentMessages, 0)
-	//var f1 FulfillmentMessages
-	//f1.Text = t1
-	//t2 = append(t2, f1)
+	t1 := make([]string, 0)
+	t1 = append(t1, "text")
+	t2 := make([]FulfillmentMessages, 0)
+	var f1 FulfillmentMessages
+	f1.Text = t1
+	t2 = append(t2, f1)
 
 	simpleResponse := SimpleResponse{
 		TextToSpeech: "hello",
@@ -75,9 +75,9 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	}
 
 	answer := answer{
-		Payload: payload,
-		//FulfillmentText:     "hello",
-		//FulfillmentMessages: t2,
+		Payload:             payload,
+		FulfillmentText:     "hello",
+		FulfillmentMessages: t2,
 	}
 
 	handlers.HandlerInterfaceAssistant(w, answer)
@@ -98,9 +98,9 @@ type Parameters struct {
 }
 
 type answer struct {
-	Payload Payload `json:"payload"`
-	//FulfillmentText     string                `json:"fulfillmentText"`
-	//FulfillmentMessages []FulfillmentMessages `json:"fulfillmentMessages"`
+	Payload             Payload               `json:"payload"`
+	FulfillmentText     string                `json:"fulfillmentText"`
+	FulfillmentMessages []FulfillmentMessages `json:"fulfillmentMessages"`
 }
 
 type Payload struct {
