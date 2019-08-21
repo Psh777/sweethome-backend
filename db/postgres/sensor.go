@@ -37,8 +37,14 @@ func GetDataByType(sensorId string, sensorType int) ([]types.SensorData, error) 
 }
 
 func GetDataByTypeActually(room string, sensorType int) (float64, error) {
+	var sensorId float64
+	err := DBX.Get(&sensorId, "SELECT sensor_value FROM sensors WHERE room = $1 LIMIT 1;", room)
+	if err != nil {
+		fmt.Println("get SensorID: ", err)
+		return 0, err
+	}
 	var data float64
-	err := DBX.Get(&data, "SELECT sensor_value FROM sensors_data WHERE room = $1 AND sensor_type = $2 ORDER BY id DESC LIMIT 1;", room, sensorType)
+	err = DBX.Get(&data, "SELECT sensor_value FROM sensors_data WHERE sensor_id = $1 AND sensor_type = $2 ORDER BY id DESC LIMIT 1;", sensorId, sensorType)
 	if err != nil {
 		fmt.Println("get Data: ", err)
 		return 0, err
