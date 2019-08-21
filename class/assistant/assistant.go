@@ -60,7 +60,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		case 5: prefix = "ппм"
 		}
 
-		str := fmt.Sprintf("%.0f", data) + prefix
+		str := "Судя по последним замерам " + fmt.Sprintf("%.0f", data) + " " + prefix
 		CreateResponse(w, str, str)
 
 	case "light":
