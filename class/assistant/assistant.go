@@ -50,8 +50,8 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	t2 = append(t2, f1)
 
 	simpleResponse := SimpleResponse{
-		TextToSpeech: "hello",
-		DisplayText:  "hello",
+		TextToSpeech: "hello speech",
+		DisplayText:  "hello display text",
 	}
 
 	item := Items{
@@ -78,7 +78,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		Payload:             payload,
 		//FulfillmentText:     "hello",
 		//FulfillmentMessages: t2,
-		Response:            "hello",
+		Response:            "hello response",
 	}
 
 	handlers.HandlerInterfaceAssistant(w, answer)
