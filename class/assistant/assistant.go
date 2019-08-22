@@ -3,6 +3,7 @@ package assistant
 import (
 	"../../db/postgres"
 	"../../webserver/handlers"
+	"../sonoff"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -54,17 +55,22 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		var prefix string
 
 		switch intTypeSensor {
-		case 1: prefix = "градусов"
-		case 2: prefix = "процентов"
-		case 3: prefix = "едениц ртутного столба"
-		case 5: prefix = "ппм"
+		case 1:
+			prefix = "градусов"
+		case 2:
+			prefix = "процентов"
+		case 3:
+			prefix = "единиц ртутного столба"
+		case 5:
+			prefix = "ппм"
 		}
 
 		str := "" + fmt.Sprintf("%.0f", data) + " " + prefix
 		CreateResponse(w, str, str)
 
 	case "light":
-		CreateResponse(w, "На данный момент не доступно", "На данный момент не доступно")
+		sonoff.Switch(t.QueryResult.Parameters.SwitchState)
+		CreateResponse(w, "Готово", "Готово")
 	}
 }
 
@@ -80,7 +86,7 @@ type QueryResult struct {
 }
 
 type Parameters struct {
-	TypeSensor string `json:"type-sensor"`
-	Room       string `json:"room"`
+	TypeSensor  string `json:"type-sensor"`
+	Room        string `json:"room"`
+	SwitchState string `json:"switch-state"`
 }
-
