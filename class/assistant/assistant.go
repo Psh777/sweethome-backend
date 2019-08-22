@@ -69,8 +69,10 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		CreateResponse(w, str, str)
 
 	case "light":
+
 		sonoff.Switch(t.QueryResult.Parameters.SwitchState)
 		CreateResponse(w, "Готово", "Готово")
+
 	}
 }
 

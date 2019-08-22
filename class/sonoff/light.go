@@ -34,7 +34,7 @@ func Switch(state string) {
 }
 
 type Request struct {
-	DeviceID string `json:"device_id"`
+	DeviceID string `json:"deviceid"`
 	Data     Data   `json:"data"`
 }
 
