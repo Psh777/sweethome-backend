@@ -23,7 +23,7 @@ func Switch(state string) {
 		return
 	}
 
-	_, err = http_request.POST("http://10.0.0.146:8081", "zeroconf/switch", string(reqString))
+	_, err = http_request.POST("http://91.133.2.232:8082", "zeroconf/switch", string(reqString))
 
 	if err != nil {
 		fmt.Println(err)
