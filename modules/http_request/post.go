@@ -13,7 +13,7 @@ import (
 
 func POST(endpoint, request, bodystring string) ([]byte, error) {
 
-	fmt.Printf("post: (%v, %v, %v)", endpoint, request)
+	fmt.Printf("post: (%v, %v, %v)", endpoint, request, bodystring)
 
 	//client := ProxyHttpClient()
 	client := &http.Client{}
