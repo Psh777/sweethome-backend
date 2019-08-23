@@ -3,7 +3,7 @@ package types
 type Sensor struct {
 	SensorID        string       `json:"sensor_id"        db:"id"`
 	Comment         string       `json:"comment"          db:"comment"`
-	Place           string       `json:"place"            db:"place"`
+	Room            string       `json:"room"             db:"room"`
 	Alive           int64        `json:"alive"            db:"alive"`
 	Data            []SensorData `json:"data"`
 	RequestID       string       `json:"request_id"       db:"request_id"`
@@ -20,7 +20,6 @@ type SensorData struct {
 	TimeStampFormat string  `json:"timestamp_format"  db:"timestamp"`
 	RequestID       string  `json:"request_id"        db:"request_id"`
 }
-
 
 type SensorDataByTime []SensorData
 
