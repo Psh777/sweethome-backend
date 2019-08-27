@@ -97,10 +97,12 @@ func RunBot(myconfig types.MyConfig) {
 		switch strings.ToLower(fraza[0]) {
 
 		case "on":
+			fmt.Println("GO on")
 			c := config.GetMyConfig()
 			_, _ = http_request.GET(c.Env.SecurityBackend, "security/on")
 
 		case "off":
+			fmt.Println("GO off")
 			c := config.GetMyConfig()
 			_, _ = http_request.GET(c.Env.SecurityBackend, "security/off")
 
