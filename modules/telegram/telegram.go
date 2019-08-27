@@ -2,6 +2,7 @@ package telegram
 
 import (
 	"../../db/postgres"
+	"../../modules/http_request"
 	"../../types"
 	"../../webserver/handlers"
 	"../config"
@@ -66,6 +67,7 @@ func RunBot(myconfig types.MyConfig) {
 
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, mess)
 			_, _ = bot.Send(msg)
+
 		}
 
 		fraza := strings.Split(update.Message.Text, " ")
@@ -94,7 +96,15 @@ func RunBot(myconfig types.MyConfig) {
 
 		switch strings.ToLower(fraza[0]) {
 
-		//case "getfile":
+		case "on":
+			c := config.GetMyConfig()
+			_, _ = http_request.GET(c.Env.SecurityBackend, "security/on")
+
+		case "off":
+			c := config.GetMyConfig()
+			_, _ = http_request.GET(c.Env.SecurityBackend, "security/off")
+
+			//case "getfile":
 		//	if len(fraza) == 3 {
 		//		filename, file_type, err := postgres.GetFileName(fraza[1], fraza[2])
 		//		//f, err := os.Open("./files/" + filename)
@@ -109,7 +119,6 @@ func RunBot(myconfig types.MyConfig) {
 		//		fmt.Println("Incorrect command", len(fraza))
 		//		break
 		//	}
-
 
 		}
 	}
@@ -143,4 +152,3 @@ func ChangeStatus(status bool) string {
 	}
 	return "ER"
 }
-

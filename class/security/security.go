@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+// only notify
+
 func On(w http.ResponseWriter, _ *http.Request) {
 	telegram.SendMsgBot("Security ON")
 	handlers.HandlerInterface(w, "ok")

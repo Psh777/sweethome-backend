@@ -1,7 +1,7 @@
 package types
 
 type MyConfig struct {
-	Env Env
+	Env        Env
 	MainConfig MainConfig
 }
 
@@ -13,6 +13,7 @@ type Env struct {
 	PostgresBase     string `json:"postgres_base"`
 	HttpPort         string `json:"http_port"`
 	TelegramBot      string `json:"telegram_bot"`
+	SecurityBackend  string `json:"security_backend"`
 }
 
 type MainConfig struct {
