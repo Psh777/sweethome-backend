@@ -99,12 +99,14 @@ func RunBot(myconfig types.MyConfig) {
 		case "on":
 			fmt.Println("GO on")
 			c := config.GetMyConfig()
-			_, _ = http_request.GET(c.Env.SecurityBackend, "security/on")
+			ans, err := http_request.GET(c.Env.SecurityBackend, "security/on")
+			fmt.Println(ans, err)
 
 		case "off":
 			fmt.Println("GO off")
 			c := config.GetMyConfig()
-			_, _ = http_request.GET(c.Env.SecurityBackend, "security/off")
+			ans, err := http_request.GET(c.Env.SecurityBackend, "security/off")
+			fmt.Println(ans, err)
 
 			//case "getfile":
 		//	if len(fraza) == 3 {
