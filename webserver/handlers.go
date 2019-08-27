@@ -1,7 +1,9 @@
 package webserver
 
 import (
+	"../class/security"
 	"../class/sensor"
+
 	"../class/assistant"
 	"./handlers"
 	"net/http"
@@ -35,6 +37,15 @@ func assistantPostHandler(w http.ResponseWriter, r *http.Request) {
 	assistant.ParseJson(w,r)
 }
 
+func securityOnHandler(w http.ResponseWriter, r *http.Request) {
+	security.On(w,r)
+}
 
+func securityOffHandler(w http.ResponseWriter, r *http.Request) {
+	security.Off(w,r)
+}
 
+func securityAlarmHandler(w http.ResponseWriter, r *http.Request) {
+	security.Alarm(w,r)
+}
 

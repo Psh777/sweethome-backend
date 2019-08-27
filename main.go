@@ -3,6 +3,8 @@ package main
 import (
 	"./db/postgres"
 	"./modules/config"
+	"./modules/telegram"
+
 	"./modules/lang"
 	"./webserver"
 	"fmt"
@@ -11,7 +13,7 @@ import (
 
 func main() {
 
-	fmt.Println("SWEET HOME SERVER v.0.0.2")
+	fmt.Println("SWEET HOME SERVER v.0.0.3")
 
 	fmt.Println(time.Now())
 	fmt.Println(time.Now().UTC())
@@ -28,7 +30,8 @@ func main() {
 		panic(err)
 	}
 
+	go telegram.RunBot(myConfig)
+
 	webserver.Init(myConfig)
 
 }
-
