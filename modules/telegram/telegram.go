@@ -6,6 +6,7 @@ import (
 	"../../types"
 	"../../webserver/handlers"
 	"../config"
+	"encoding/json"
 	"fmt"
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 	"log"
@@ -99,30 +100,48 @@ func RunBot(myconfig types.MyConfig) {
 		case "on":
 			fmt.Println("GO on")
 			c := config.GetMyConfig()
-			ans, err := http_request.GET(c.Env.SecurityBackend, "security/on")
-			fmt.Println(ans, err)
+			ansJson, err := http_request.GET(c.Env.SecurityBackend, "security/on")
+
+			fmt.Println(string(ansJson), err)
+			if err != nil {
+				mess := "Error: " + err.Error()
+				var answer Answer
+				err = json.Unmarshal(ansJson, &answer)
+				str := fmt.Sprint(mess, " / Code: ", answer.Code)
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, str)
+				_, _ = bot.Send(msg)
+				continue
+			}
+
+			var answer Answer
+			_ = json.Unmarshal(ansJson, &answer)
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, answer.Result)
+			_, _ = bot.Send(msg)
 
 		case "off":
 			fmt.Println("GO off")
 			c := config.GetMyConfig()
-			ans, err := http_request.GET(c.Env.SecurityBackend, "security/off")
-			fmt.Println(ans, err)
-
+			ansJson, err := http_request.GET(c.Env.SecurityBackend, "security/off")
+			fmt.Println(string(ansJson), err)
+			var answer Answer
+			_ = json.Unmarshal(ansJson, &answer)
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, answer.Result)
+			_, _ = bot.Send(msg)
 			//case "getfile":
-		//	if len(fraza) == 3 {
-		//		filename, file_type, err := postgres.GetFileName(fraza[1], fraza[2])
-		//		//f, err := os.Open("./files/" + filename)
-		//		if err != nil {
-		//			fmt.Println(err)
-		//		}
-		//		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "File: "+filename+"")
-		//		_, _ = bot.Send(msg)
-		//		msg1 := tgbotapi.NewDocumentUpload(update.Message.Chat.ID, config.GetMyConfig().Env.UploadFolder+"/"+fraza[1]+"_"+fraza[2]+"."+file_type)
-		//		_, _ = bot.Send(msg1)
-		//	} else {
-		//		fmt.Println("Incorrect command", len(fraza))
-		//		break
-		//	}
+			//	if len(fraza) == 3 {
+			//		filename, file_type, err := postgres.GetFileName(fraza[1], fraza[2])
+			//		//f, err := os.Open("./files/" + filename)
+			//		if err != nil {
+			//			fmt.Println(err)
+			//		}
+			//		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "File: "+filename+"")
+			//		_, _ = bot.Send(msg)
+			//		msg1 := tgbotapi.NewDocumentUpload(update.Message.Chat.ID, config.GetMyConfig().Env.UploadFolder+"/"+fraza[1]+"_"+fraza[2]+"."+file_type)
+			//		_, _ = bot.Send(msg1)
+			//	} else {
+			//		fmt.Println("Incorrect command", len(fraza))
+			//		break
+			//	}
 
 		}
 	}
@@ -155,4 +174,10 @@ func ChangeStatus(status bool) string {
 		return "OK"
 	}
 	return "ER"
+}
+
+type Answer struct {
+	Success bool   `json:"success"`
+	Result  string `json:"result"`
+	Code    string `json:"code"`
 }

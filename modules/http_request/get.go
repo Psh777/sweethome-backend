@@ -31,9 +31,9 @@ func GET(endpoint, request string) ([]byte, error) {
 		var response interface{}
 		err = json.Unmarshal(body, &response)
 		if err != nil {
-			return nil, err
+			return body, err
 		}
-		return nil, errors.New("status " + resp.Status)
+		return body, errors.New("status " + resp.Status)
 	}
 
 	return body, nil
