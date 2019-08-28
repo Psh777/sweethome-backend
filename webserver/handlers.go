@@ -3,7 +3,7 @@ package webserver
 import (
 	"../class/security"
 	"../class/sensor"
-
+	"../class/alisa"
 	"../class/assistant"
 	"./handlers"
 	"net/http"
@@ -35,6 +35,10 @@ func sensorPostDataHandler(w http.ResponseWriter, r *http.Request) {
 
 func assistantPostHandler(w http.ResponseWriter, r *http.Request) {
 	assistant.ParseJson(w,r)
+}
+
+func alisaPostHandler(w http.ResponseWriter, r *http.Request) {
+	alisa.ParseJson(w,r)
 }
 
 func securityOnHandler(w http.ResponseWriter, r *http.Request) {

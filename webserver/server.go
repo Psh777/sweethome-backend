@@ -20,6 +20,9 @@ func Init(myConfig types.MyConfig) {
 	//assistant
 	router.Get("/assistant", http.HandlerFunc(assistantPostHandler))
 	router.Post("/assistant", http.HandlerFunc(assistantPostHandler))
+	//alisa
+	router.Get("/alisa", http.HandlerFunc(alisaPostHandler))
+	router.Post("/alisa", http.HandlerFunc(alisaPostHandler))
 
 	//security
 	router.Get("/security/on", http.HandlerFunc(securityOnHandler))
