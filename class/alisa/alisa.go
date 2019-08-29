@@ -35,7 +35,16 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Printf("%+v\n", t)
 
+	resp := Response{
+		Text: "Привет",
+		TTS: "Привет",
+	}
+
 	handlers.HandlerInterface(w, answer{
+		Version: "1.0",
+		Sesion:  t.Session,
+		Response: resp,
+
 		//RequestID: t.Request.Session.
 	})
 
@@ -43,11 +52,11 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 
 type request struct {
 	Request Request `json:"request"`
+	Session Session `json:"session"`
 }
 
 type Request struct {
-	Command string  `json:"command"`
-	Session Session `json:"session"`
+	Command string `json:"command"`
 }
 
 type Session struct {
@@ -59,5 +68,12 @@ type Session struct {
 }
 
 type answer struct {
-	RequestID string `json:"request_id"`
+	Sesion   Session  `json:"sesion"`
+	Response Response `json:"response"`
+	Version  string   `json:"version"`
+}
+
+type Response struct {
+	Text string `json:"text"`
+	TTS  string `json:"tts"`
 }
