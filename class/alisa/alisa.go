@@ -39,7 +39,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 
 	//diaglofFlow
 	text := Text{
-		Text:         "какая температура на кухне",
+		Text:         t.Request.Command,
 		LanguageCode: "RU-ru",
 	}
 
