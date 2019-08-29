@@ -125,11 +125,11 @@ type Text struct {
 }
 
 type DialogFlowResponse struct {
-	QueryResult QueryResult `json:"query_result"`
+	QueryResult QueryResult `json:"queryResult"`
 }
 
 type QueryResult struct {
-	WebhookPayload WebhookPayload `json:"webhook_payload"`
+	WebhookPayload WebhookPayload `json:"webhookPayload"`
 }
 
 type WebhookPayload struct {
