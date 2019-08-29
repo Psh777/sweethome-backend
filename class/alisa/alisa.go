@@ -68,7 +68,7 @@ type Session struct {
 }
 
 type answer struct {
-	Sesion   Session  `json:"sesion"`
+	Session   Session  `json:"session"`
 	Response Response `json:"response"`
 	Version  string   `json:"version"`
 }
