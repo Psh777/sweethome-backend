@@ -13,7 +13,7 @@ import (
 
 func main() {
 
-	fmt.Println("SWEET HOME SERVER v.0.0.3")
+	fmt.Println("SWEET HOME SERVER v.0.0.4")
 
 	fmt.Println(time.Now())
 	fmt.Println(time.Now().UTC())
