@@ -42,7 +42,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 
 	handlers.HandlerInterfaceAssistant(w, answer{
 		Version: "1.0",
-		Sesion:  t.Session,
+		Session:  t.Session,
 		Response: resp,
 
 		//RequestID: t.Request.Session.
