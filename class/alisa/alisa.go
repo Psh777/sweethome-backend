@@ -1,7 +1,9 @@
 package alisa
 
 import (
+	"../../modules/http_request"
 	"../../webserver/handlers"
+	"../assistant"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -35,13 +37,44 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Printf("%+v\n", t)
 
+	//diaglofFlow
+	text := Text{
+		Text:         "какая температура на кухне",
+		LanguageCode: "RU-ru",
+	}
+
+	q := QueryInout{
+		Text: text,
+	}
+
+	body := RequestDialogFlow{
+		QueryInput: q,
+	}
+
+	jsonBody, _ := json.Marshal(body)
+	ansDialogFlowJson, err := http_request.POST("https://dialogflow.googleapis.com/v2beta1", "projects/sweethome2-382da/agent/sessions/123456789:detectIntent", string(jsonBody))
+	if err != nil {
+		fmt.Println(err)
+		handlers.HandlerError(w, err.Error())
+		return
+	}
+
+	var ansDialogFlow DialogFlowResponse
+	err = json.Unmarshal(ansDialogFlowJson, &ansDialogFlow)
+	if err != nil {
+		fmt.Println(err)
+		handlers.HandlerError(w, err.Error())
+		return
+	}
+
+
 	resp := Response{
-		Text: "Привет",
-		TTS: "Привет",
+		Text: ansDialogFlow.QueryResult.WebhookPayload.Google.RichResponse.Items[0].SimpleResponse.DisplayText,
+		TTS:  ansDialogFlow.QueryResult.WebhookPayload.Google.RichResponse.Items[0].SimpleResponse.TextToSpeech,
 	}
 
 	handlers.HandlerInterfaceAssistant(w, answer{
-		Version: "1.0",
+		Version:  "1.0",
 		Session:  t.Session,
 		Response: resp,
 
@@ -68,7 +101,7 @@ type Session struct {
 }
 
 type answer struct {
-	Session   Session  `json:"session"`
+	Session  Session  `json:"session"`
 	Response Response `json:"response"`
 	Version  string   `json:"version"`
 }
@@ -77,3 +110,29 @@ type Response struct {
 	Text string `json:"text"`
 	TTS  string `json:"tts"`
 }
+
+type RequestDialogFlow struct {
+	QueryInput QueryInout `json:"query_input"`
+}
+
+type QueryInout struct {
+	Text Text `json:"text"`
+}
+
+type Text struct {
+	Text         string `json:"text"`
+	LanguageCode string `json:"language_code"`
+}
+
+type DialogFlowResponse struct {
+	QueryResult QueryResult `json:"query_result"`
+}
+
+type QueryResult struct {
+	WebhookPayload WebhookPayload `json:"webhook_payload"`
+}
+
+type WebhookPayload struct {
+	Google assistant.Google `json:"google"`
+}
+
