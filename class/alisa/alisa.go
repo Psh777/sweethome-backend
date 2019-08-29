@@ -40,7 +40,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		TTS: "Привет",
 	}
 
-	handlers.HandlerInterface(w, answer{
+	handlers.HandlerInterfaceAssistant(w, answer{
 		Version: "1.0",
 		Sesion:  t.Session,
 		Response: resp,
