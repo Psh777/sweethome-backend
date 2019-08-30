@@ -1,10 +1,10 @@
 package webserver
 
 import (
-	"../class/security"
-	"../class/sensor"
 	"../class/alisa"
 	"../class/assistant"
+	"../class/sensor"
+	"../modules/telegram"
 	"./handlers"
 	"net/http"
 )
@@ -42,14 +42,17 @@ func alisaPostHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func securityOnHandler(w http.ResponseWriter, r *http.Request) {
-	security.On(w,r)
+	telegram.SendMsgBot("Security ON")
+	handlers.HandlerInterface(w, "ok")
 }
 
 func securityOffHandler(w http.ResponseWriter, r *http.Request) {
-	security.Off(w,r)
+	telegram.SendMsgBot("Security OFF")
+	handlers.HandlerInterface(w, "ok")
 }
 
 func securityAlarmHandler(w http.ResponseWriter, r *http.Request) {
-	security.Alarm(w,r)
+	telegram.SendMsgBot("ALARM!!! ALARM!!! ALARM!!!")
+	handlers.HandlerInterface(w, "ok")
 }
 

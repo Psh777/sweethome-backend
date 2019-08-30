@@ -3,6 +3,8 @@ package assistant
 import (
 	"../../db/postgres"
 	"../../webserver/handlers"
+	"../../class/security"
+
 	"../sonoff"
 	"encoding/json"
 	"fmt"
@@ -73,6 +75,26 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		sonoff.Switch(t.QueryResult.Parameters.SwitchState)
 		CreateResponse(w, "Готово", "Готово")
 
+	case "security":
+
+		switch t.QueryResult.Parameters.SwitchState {
+		case "on":
+			msg, err := security.SetOn()
+			if err != nil {
+				CreateResponse(w, err.Error(), err.Error())
+			} else {
+				CreateResponse(w, msg, msg)
+			}
+
+		case "off":
+			msg, err := security.SetOff()
+			if err != nil {
+				CreateResponse(w, err.Error(), err.Error())
+			} else {
+				CreateResponse(w, msg, msg)
+			}
+
+		}
 	}
 }
 
