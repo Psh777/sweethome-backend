@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"net/url"
 	"os/exec"
+	"strings"
 )
 
 func POST(endpoint, request, bodystring string) ([]byte, error) {
@@ -28,9 +29,10 @@ func POST(endpoint, request, bodystring string) ([]byte, error) {
 	if err != nil {
 		fmt.Println("GCLOUD KEY ERROR:", err)
 	}
-	fmt.Printf("GCLOUD KEY %s\n", string(gcloudKey))
+	gcloudKeyStr := strings.Replace(string(gcloudKey), "\n", "", -1)
+	fmt.Printf("GCLOUD KEY %s\n", gcloudKeyStr)
 
-	req.Header.Set("Authorization", "Bearer " + string(gcloudKey))
+	req.Header.Set("Authorization", "Bearer " + gcloudKeyStr)
 
 	resp, err := client.Do(req)
 	if err != nil {
