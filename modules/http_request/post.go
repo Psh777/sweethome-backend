@@ -7,8 +7,10 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
+	"os/exec"
 )
 
 func POST(endpoint, request, bodystring string) ([]byte, error) {
@@ -20,9 +22,18 @@ func POST(endpoint, request, bodystring string) ([]byte, error) {
 
 	req, err := http.NewRequest("POST", endpoint+"/"+request, bytes.NewBuffer([]byte(bodystring)))
 
+
 	//req.Header.Set("api-key", apikey)
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "Bearer ya29.c.Elp0ByuYlo4ThaOzedgl3cqpJnp0zsNHuKhODA969yLx1HygBWZ8pXSG-PaMX8NJUNYx6YBk0b2iiWgArCA9SWZY68gljHBOn_WqjzKEMTz9zddNzy0_mdtVnpg")
+
+
+	gcloudKey, err := exec.Command("./gcloud.sh").Output()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("The date is %s\n", string(gcloudKey))
+
+	req.Header.Set("Authorization", "Bearer " + string(gcloudKey))
 
 	resp, err := client.Do(req)
 	if err != nil {
