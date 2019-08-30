@@ -22,16 +22,14 @@ func POST(endpoint, request, bodystring string) ([]byte, error) {
 
 	req, err := http.NewRequest("POST", endpoint+"/"+request, bytes.NewBuffer([]byte(bodystring)))
 
-
 	//req.Header.Set("api-key", apikey)
 	req.Header.Set("Content-Type", "application/json")
 
-
 	gcloudKey, err := exec.Command("./gcloud.sh").Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("GCLOUD KEY ERROR:", err)
 	}
-	fmt.Printf("The date is %s\n", string(gcloudKey))
+	fmt.Printf("GCLOUD KEY %s\n", string(gcloudKey))
 
 	req.Header.Set("Authorization", "Bearer " + string(gcloudKey))
 
