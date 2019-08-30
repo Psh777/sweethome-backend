@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 	"os/exec"
@@ -27,7 +26,7 @@ func POST(endpoint, request, bodystring string) ([]byte, error) {
 
 	gcloudKey, err := exec.Command("./gcloud.sh").Output()
 	if err != nil {
-		log.Fatal("GCLOUD KEY ERROR:", err)
+		fmt.Println("GCLOUD KEY ERROR:", err)
 	}
 	fmt.Printf("GCLOUD KEY %s\n", string(gcloudKey))
 
