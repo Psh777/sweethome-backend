@@ -75,14 +75,14 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	if ansDialogFlow.WebhookStatus.Code > 0 {
 
 		resp = Response{
-			Text: ansDialogFlow.QueryResult.WebhookPayload.Google.RichResponse.Items[0].SimpleResponse.DisplayText,
-			TTS:  ansDialogFlow.QueryResult.WebhookPayload.Google.RichResponse.Items[0].SimpleResponse.TextToSpeech,
+			Text: ansDialogFlow.QueryResult.FulfillmentText,
 		}
-
+		
 	} else {
 
 		resp = Response{
-			Text: ansDialogFlow.QueryResult.FulfillmentText,
+			Text: ansDialogFlow.QueryResult.WebhookPayload.Google.RichResponse.Items[0].SimpleResponse.DisplayText,
+			TTS:  ansDialogFlow.QueryResult.WebhookPayload.Google.RichResponse.Items[0].SimpleResponse.TextToSpeech,
 		}
 
 	}
