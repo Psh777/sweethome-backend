@@ -1,6 +1,7 @@
 package alisa
 
 import (
+	"../../modules/config"
 	"../../modules/http_request"
 	"../../webserver/handlers"
 	"../assistant"
@@ -51,8 +52,10 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		QueryInput: q,
 	}
 
+	c := config.GetMyConfig()
+
 	jsonBody, _ := json.Marshal(body)
-	ansDialogFlowJson, err := http_request.POST("https://dialogflow.googleapis.com/v2beta1", "projects/sweethome2-382da/agent/sessions/123456789:detectIntent", string(jsonBody))
+	ansDialogFlowJson, err := http_request.POSTFLOW("https://dialogflow.googleapis.com/v2beta1", "projects/"+ c.Env.DialogFlowProjectID + "/agent/sessions/123456789:detectIntent", string(jsonBody))
 	if err != nil {
 		fmt.Println(err)
 		handlers.HandlerError(w, err.Error())
@@ -69,7 +72,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 
 	var resp Response
 
-	if ansDialogFlow.WebhookStatus.Code != 3 {
+	if ansDialogFlow.WebhookStatus.Code > 0 {
 
 		resp = Response{
 			Text: ansDialogFlow.QueryResult.WebhookPayload.Google.RichResponse.Items[0].SimpleResponse.DisplayText,

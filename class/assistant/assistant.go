@@ -1,9 +1,9 @@
 package assistant
 
 import (
+	"../../class/security"
 	"../../db/postgres"
 	"../../webserver/handlers"
-	"../../class/security"
 
 	"../sonoff"
 	"encoding/json"

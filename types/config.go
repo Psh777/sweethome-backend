@@ -6,14 +6,15 @@ type MyConfig struct {
 }
 
 type Env struct {
-	PostgresHost     string `json:"postgres_host"`
-	PostgresPort     string `json:"postgres_port"`
-	PostgresUser     string `json:"postgres_user"`
-	PostgresPassword string `json:"postgres_password"`
-	PostgresBase     string `json:"postgres_base"`
-	HttpPort         string `json:"http_port"`
-	TelegramBot      string `json:"telegram_bot"`
-	SecurityBackend  string `json:"security_backend"`
+	PostgresHost        string `json:"postgres_host"`
+	PostgresPort        string `json:"postgres_port"`
+	PostgresUser        string `json:"postgres_user"`
+	PostgresPassword    string `json:"postgres_password"`
+	PostgresBase        string `json:"postgres_base"`
+	HttpPort            string `json:"http_port"`
+	TelegramBot         string `json:"telegram_bot"`
+	SecurityBackend     string `json:"security_backend"`
+	DialogFlowProjectID string `json:"dialog_flow_project_id"`
 }
 
 type MainConfig struct {
