@@ -22,7 +22,7 @@ func POST(endpoint, request, bodystring string) ([]byte, error) {
 
 	//req.Header.Set("api-key", apikey)
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "ya29.c.Elp0B-KkJWbMmxEhI3luXir6fcJMzMu4Vm8S0dC_X-T4xEB9KSfuILlcUh8GIhkM3ZKlDefymOBmUDRfhEJR8jILjChs6Z9q0k1U0UlrywOxKYpkeil6mXbo2g4")
+	req.Header.Set("Authorization", "Bearer ya29.c.Elp0ByuYlo4ThaOzedgl3cqpJnp0zsNHuKhODA969yLx1HygBWZ8pXSG-PaMX8NJUNYx6YBk0b2iiWgArCA9SWZY68gljHBOn_WqjzKEMTz9zddNzy0_mdtVnpg")
 
 	resp, err := client.Do(req)
 	if err != nil {
