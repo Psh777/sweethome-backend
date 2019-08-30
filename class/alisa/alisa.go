@@ -67,18 +67,27 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var resp Response
 
-	resp := Response{
-		Text: ansDialogFlow.QueryResult.WebhookPayload.Google.RichResponse.Items[0].SimpleResponse.DisplayText,
-		TTS:  ansDialogFlow.QueryResult.WebhookPayload.Google.RichResponse.Items[0].SimpleResponse.TextToSpeech,
+	if ansDialogFlow.WebhookStatus.Code != 3 {
+
+		resp = Response{
+			Text: ansDialogFlow.QueryResult.WebhookPayload.Google.RichResponse.Items[0].SimpleResponse.DisplayText,
+			TTS:  ansDialogFlow.QueryResult.WebhookPayload.Google.RichResponse.Items[0].SimpleResponse.TextToSpeech,
+		}
+
+	} else {
+
+		resp = Response{
+			Text: ansDialogFlow.QueryResult.FulfillmentText,
+		}
+
 	}
 
 	handlers.HandlerInterfaceAssistant(w, answer{
 		Version:  "1.0",
 		Session:  t.Session,
 		Response: resp,
-
-		//RequestID: t.Request.Session.
 	})
 
 }
@@ -125,14 +134,19 @@ type Text struct {
 }
 
 type DialogFlowResponse struct {
-	QueryResult QueryResult `json:"queryResult"`
+	QueryResult   QueryResult   `json:"queryResult"`
+	WebhookStatus WebhookStatus `json:"webhookStatus"`
 }
 
 type QueryResult struct {
-	WebhookPayload WebhookPayload `json:"webhookPayload"`
+	WebhookPayload  WebhookPayload `json:"webhookPayload"`
+	FulfillmentText string         `json:"fulfillmentText"`
 }
 
 type WebhookPayload struct {
 	Google assistant.Google `json:"google"`
 }
 
+type WebhookStatus struct {
+	Code int `json:"code"`
+}
