@@ -24,7 +24,7 @@ func POST(endpoint, request, bodystring string) ([]byte, error) {
 	//req.Header.Set("api-key", apikey)
 	req.Header.Set("Content-Type", "application/json")
 
-	gcloudKey, err := exec.Command("./gcloud.sh").Output()
+	gcloudKey, err := exec.Command("./../gcloud.sh").Output()
 	if err != nil {
 		fmt.Println("GCLOUD KEY ERROR:", err)
 	}
