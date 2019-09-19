@@ -6,6 +6,6 @@
   "postgres_base":"sweet_home",
   "http_port": "3100",
   "telegram_bot": "912312308:AAF9_USVFTDCPFFhkkqFEQBhWeGph1OK1AA",
-  "security_backend": "http://91.133.2.232:3000",
+  "security_backend": "http://93.123.132.168:3000",
   "dialog_flow_project_id": "sweethome2-382da"
 }

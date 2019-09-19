@@ -77,7 +77,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		resp = Response{
 			Text: ansDialogFlow.QueryResult.FulfillmentText,
 		}
-		
+
 	} else {
 
 		resp = Response{
