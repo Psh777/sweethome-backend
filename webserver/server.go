@@ -27,7 +27,7 @@ func Init(myConfig types.MyConfig) {
 	//security
 	router.Get("/security/on", http.HandlerFunc(securityOnHandler))
 	router.Get("/security/off", http.HandlerFunc(securityOffHandler))
-	router.Get("/security/alarm", http.HandlerFunc(securityAlarmHandler))
+	router.Get("/security/alarm/:zone", http.HandlerFunc(securityAlarmHandler))
 
 
 

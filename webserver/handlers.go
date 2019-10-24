@@ -52,7 +52,8 @@ func securityOffHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func securityAlarmHandler(w http.ResponseWriter, r *http.Request) {
-	telegram.SendMsgBot("ALARM!!! ALARM!!! ALARM!!!")
+	zone := r.URL.Query().Get(":zone")
+	telegram.SendMsgBot("ALARM!!! ALARM!!! ALARM!!! Zone: " + zone)
 	handlers.HandlerInterface(w, "ok")
 }
 
