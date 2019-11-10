@@ -36,7 +36,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 		handlers.HandlerError(w, err.Error())
 		return
 	}
-	fmt.Printf("%+v\n", t)
+	//fmt.Printf("%+v\n", t)
 
 	//diaglofFlow
 	text := Text{
