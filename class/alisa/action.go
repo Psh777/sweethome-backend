@@ -2,6 +2,7 @@ package alisa
 
 import (
 	"../../webserver/handlers"
+	"../sonoff"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -36,13 +37,17 @@ func Action(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Printf("%+v\n", t)
 
+	//switch
+
+	sonoff.Switch(t.Payload.Devices[0].Capabilities[0].State.Instance)
+
 	// answer
 
 	caps := make([]Capabilitie, 0)
 	caps = append(caps, Capabilitie{
 		Type: "devices.capabilities.on_off",
 		State: State{
-			Instance: "on",
+			Instance: t.Payload.Devices[0].Capabilities[0].State.Instance,
 			ActionResult: ActionResult{
 				Status: "DONE",
 			},
