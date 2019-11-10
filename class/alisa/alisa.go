@@ -38,8 +38,6 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	}
 	//fmt.Printf("%+v\n", t)
 
-	Swith
-
 	//diaglofFlow
 	text := Text{
 		Text:         t.Request.Command,
