@@ -27,7 +27,7 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		fmt.Println(err)
 	} else {
-		fmt.Printf("%+v\n", t)
+		//fmt.Printf("%+v\n", t)
 
 		if !valid.IsUUID(t.SensorID) {
 			handlers.HandlerError(w, "sensor ID invalid")
