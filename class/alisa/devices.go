@@ -1,26 +1,40 @@
 package alisa
 
 import (
+	"../../db/postgres"
 	"../../webserver/handlers"
+	"fmt"
 	"net/http"
 )
 
 func Devices(w http.ResponseWriter, r *http.Request) {
 
-	caps := make([]Capabilitie, 0)
-	caps = append(caps, Capabilitie{Type: "devices.capabilities.on_off"})
+	dbDevises, err := postgres.GetDivices()
 
-	device := Device{
-		ID:           "1",
-		Name:         "Лампa в кабинете",
-		Description:  "Лампa в кабинете",
-		Room:         "Кабинет",
-		Type:         "devices.types.light",
-		Capabilities: caps,
+	if err != nil {
+		fmt.Println(err)
+		return
 	}
 
 	devices := make([]Device, 0)
-	devices = append(devices, device)
+
+	for j := 0; j <= len(dbDevises); j++ {
+
+		caps := make([]Capabilitie, 0)
+		caps = append(caps, Capabilitie{Type: dbDevises[j].AlisaCapabilities})
+
+		device := Device{
+			ID:           dbDevises[j].ID,
+			Name:         dbDevises[j].Name,
+			Description:  dbDevises[j].Description,
+			Room:         dbDevises[j].Room,
+			Type:         dbDevises[j].AlisaType,
+			Capabilities: caps,
+		}
+
+		devices = append(devices, device)
+
+	}
 
 	payload := Payload{
 		UserID:  "psh",
