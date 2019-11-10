@@ -28,7 +28,7 @@ func Devices(w http.ResponseWriter, r *http.Request) {
 	}
 
 	answer := Answer{
-		RequestId: r.Header.Get("X-Request-Id"),
+		RequestID: r.Header.Get("X-Request-Id"),
 		Payload:   payload,
 	}
 
@@ -37,7 +37,7 @@ func Devices(w http.ResponseWriter, r *http.Request) {
 }
 
 type Answer struct {
-	RequestId string  `json:"request_id"`
+	RequestID string  `json:"request_id"`
 	Payload   Payload `json:"payload"`
 }
 
@@ -56,5 +56,6 @@ type Device struct {
 }
 
 type Capabilitie struct {
-	Type string `json:"type"`
+	Type  string `json:"type"`
+	State State  `json:"state"`
 }
