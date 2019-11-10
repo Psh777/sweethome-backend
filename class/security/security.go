@@ -8,8 +8,6 @@ import (
 )
 
 
-
-
 // action
 
 func SetOn() (string, error) {
