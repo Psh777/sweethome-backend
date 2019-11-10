@@ -12,9 +12,9 @@ func Devices(w http.ResponseWriter, r *http.Request) {
 
 	device := Device{
 		ID:           "1",
-		Name:         "лампa",
-		Description:  "лампa",
-		Room:         "кабинет",
+		Name:         "Лампa в кабинете",
+		Description:  "Лампa в кабинете",
+		Room:         "Кабинет",
 		Type:         "devices.types.light",
 		Capabilities: caps,
 	}
