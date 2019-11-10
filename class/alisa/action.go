@@ -52,6 +52,7 @@ func Action(w http.ResponseWriter, r *http.Request) {
 	devices := make([]Device, 0)
 	devices = append(devices, Device{
 		ID: "1",
+		Capabilities: caps,
 	})
 
 	payload := Payload{
