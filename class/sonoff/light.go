@@ -1,23 +1,31 @@
 package sonoff
 
 import (
+	"../../db/postgres"
 	"../../modules/http_request"
 	"encoding/json"
 	"fmt"
 )
 
-func Switch(state string) {
+func Switch(state, deviceID string) {
 
 	data := Data{
 		Switch: state,
 	}
 
 	req := Request{
-		DeviceID: "10008fac66",
+		DeviceID: deviceID,
 		Data:     data,
 	}
 
 	reqString, err := json.Marshal(req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	device, err := postgres.GetDevice(deviceID)
+
 	if err != nil {
 		fmt.Println(err)
 		return

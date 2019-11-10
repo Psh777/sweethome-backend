@@ -9,7 +9,7 @@ import (
 
 func Devices(w http.ResponseWriter, r *http.Request) {
 
-	dbDevises, err := postgres.GetDivices()
+	dbDevises, err := postgres.GetDevices()
 
 	if err != nil {
 		fmt.Println(err)

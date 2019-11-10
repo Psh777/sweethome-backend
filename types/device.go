@@ -10,4 +10,5 @@ type DBDevice struct {
 	Room              string `json:"room"        db:"room"`
 	Name              string `json:"name"        db:"name"`
 	Description       string `json:"description" db:"description"`
+	Url               string `json:"url"         db:"url"`
 }

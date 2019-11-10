@@ -40,9 +40,9 @@ func Action(w http.ResponseWriter, r *http.Request) {
 	//switch
 
 	if t.Payload.Devices[0].Capabilities[0].State.Value {
-		sonoff.Switch("on")
+		sonoff.Switch("on", t.Payload.Devices[0].ID)
 	} else {
-		sonoff.Switch("off")
+		sonoff.Switch("off", t.Payload.Devices[0].ID)
 	}
 
 	// answer
@@ -60,7 +60,7 @@ func Action(w http.ResponseWriter, r *http.Request) {
 
 	devices := make([]Device, 0)
 	devices = append(devices, Device{
-		ID:           "1",
+		ID:           t.Payload.Devices[0].ID,
 		Capabilities: caps,
 	})
 
