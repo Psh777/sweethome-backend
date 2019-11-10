@@ -18,7 +18,7 @@ func Devices(w http.ResponseWriter, r *http.Request) {
 
 	devices := make([]Device, 0)
 
-	for j := 0; j <= len(dbDevises); j++ {
+	for j := 0; j < len(dbDevises); j++ {
 
 		caps := make([]Capabilitie, 0)
 		caps = append(caps, Capabilitie{Type: dbDevises[j].AlisaCapabilities})
