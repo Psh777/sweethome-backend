@@ -31,7 +31,7 @@ func Switch(state, deviceID string) {
 		return
 	}
 
-	_, err = http_request.POST("http://93.123.132.168:9001", "zeroconf/switch", string(reqString))
+	_, err = http_request.POST(device.Url, "zeroconf/switch", string(reqString))
 
 	if err != nil {
 		fmt.Println(err)

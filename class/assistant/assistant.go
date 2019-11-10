@@ -5,7 +5,6 @@ import (
 	"../../db/postgres"
 	"../../webserver/handlers"
 
-	"../sonoff"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -72,7 +71,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 
 	case "light":
 
-		sonoff.Switch(t.QueryResult.Parameters.SwitchState)
+		//sonoff.Switch(t.QueryResult.Parameters.SwitchState)
 		CreateResponse(w, "Готово", "Готово")
 
 	case "security":
