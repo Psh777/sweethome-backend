@@ -39,7 +39,11 @@ func Action(w http.ResponseWriter, r *http.Request) {
 
 	//switch
 
-	sonoff.Switch(t.Payload.Devices[0].Capabilities[0].State.Instance)
+	if t.Payload.Devices[0].Capabilities[0].State.Value {
+		sonoff.Switch("on")
+	} else {
+		sonoff.Switch("off")
+	}
 
 	// answer
 
@@ -56,7 +60,7 @@ func Action(w http.ResponseWriter, r *http.Request) {
 
 	devices := make([]Device, 0)
 	devices = append(devices, Device{
-		ID: "1",
+		ID:           "1",
 		Capabilities: caps,
 	})
 
@@ -85,6 +89,7 @@ type actionAnswer struct {
 
 type State struct {
 	Instance     string       `json:"instance"`
+	Value        bool         `json:"value"`
 	ActionResult ActionResult `json:"action_result"`
 }
 
