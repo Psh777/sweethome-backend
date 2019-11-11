@@ -30,9 +30,7 @@ func Init(myConfig types.MyConfig) {
 	router.Get("/security/on", http.HandlerFunc(securityOnHandler))
 	router.Get("/security/off", http.HandlerFunc(securityOffHandler))
 	router.Get("/security/alarm/:zone", http.HandlerFunc(securityAlarmHandler))
-
-
-
+	
 	fmt.Println("====================================================")
 	fmt.Println("ListenAndServe : " + myConfig.Env.HttpPort)
 
