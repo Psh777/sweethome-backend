@@ -1,11 +1,12 @@
 package alisa
 
 import (
-"../../webserver/handlers"
-"encoding/json"
-"fmt"
-"io/ioutil"
-"net/http"
+	"../../db/postgres"
+	"../../webserver/handlers"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"net/http"
 )
 
 func DeviceState(w http.ResponseWriter, r *http.Request) {
@@ -39,7 +40,68 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%+v\n", t)
 
 	//action
+	
+	devices := make([]Device, 0) 
 
-	handlers.HandlerInterfaceAssistant(w, "ok")
+	for j := 0; j < len(t.Devices); j++ {
+		dbDevice, err := postgres.GetDevice(t.Devices[j].ID)
+		if err != nil {
+			handlers.HandlerError(w, err.Error())
+			return
+		}
+
+		caps := make([]Capabilitie, 0)
+
+		switch dbDevice.AlisaCapabilities {
+		case "devices.capabilities.on_off":
+			var v bool
+			if dbDevice.State == "on" {
+				v = true
+			} else {
+				v = false
+			}
+			state := State{
+				Instance: "on",
+				Value:    v,
+			}
+			caps = append(caps, Capabilitie{
+				Type:       dbDevice.AlisaCapabilities,
+				State:      state,
+			})
+
+		case "devices.capabilities.color_setting":
+			//1
+			var v bool
+			if dbDevice.State == "on" {
+				v = true
+			} else {
+				v = false
+			}
+			state := State{
+				Instance: "on",
+				Value:    v,
+			}
+			caps = append(caps, Capabilitie{
+				Type:       dbDevice.AlisaCapabilities,
+				State:      state,
+			})
+			//2
+			state = State{
+				Instance:     "rgb",
+				Value:        0,
+			}
+
+			caps = append(caps, Capabilitie{
+				Type:       dbDevice.AlisaCapabilities,
+				State:      state,
+			})
+		}
+
+		devices = append(devices, CreateDevice(dbDevice, caps))
+
+	}
+
+	ans := CreateDeviceAnswer(r.Header.Get("X-Request-Id"), devices)
+	handlers.HandlerInterfaceAssistant(w, ans)
 
 }

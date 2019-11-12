@@ -54,7 +54,6 @@ func Action(w http.ResponseWriter, r *http.Request) {
 			sonoff.Switch("off", t.Payload.Devices[0].ID)
 		}
 
-
 	case "devices.capabilities.color_setting":
 
 		var val HSV
@@ -85,41 +84,7 @@ func Action(w http.ResponseWriter, r *http.Request) {
 		Capabilities: caps,
 	})
 
-	payload := Payload{
-		UserID:  "psh",
-		Devices: devices,
-	}
+	ans := CreateDeviceAnswer(r.Header.Get("X-Request-Id"), devices)
+	handlers.HandlerInterfaceAssistant(w, ans)
 
-	answer := actionAnswer{
-		RequestID: r.Header.Get("X-Request-Id"),
-		Payload:   payload,
-	}
-
-	handlers.HandlerInterfaceAssistant(w, answer)
-
-}
-
-type actionRequest struct {
-	Payload Payload `json:"payload"`
-}
-
-type actionAnswer struct {
-	RequestID string  `json:"request_id"`
-	Payload   Payload `json:"payload"`
-}
-
-type State struct {
-	Instance     string       `json:"instance"`
-	Value        interface{}  `json:"value"`
-	ActionResult ActionResult `json:"action_result"`
-}
-
-type ActionResult struct {
-	Status string `json:"status"`
-}
-
-type HSV struct {
-	H int `json:"h"`
-	S int `json:"s"`
-	V int `json:"v"`
 }
