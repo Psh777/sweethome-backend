@@ -52,7 +52,7 @@ type Capabilitie struct {
 
 type Parameters struct {
 	ColorModel   string       `json:"color_model"`
-	TemperatureK TemperatureK `json:"temperature_k"`
+	//TemperatureK TemperatureK `json:"temperature_k"`
 	Value        int64        `json:"value"`
 }
 
