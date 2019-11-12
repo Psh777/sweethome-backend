@@ -24,6 +24,8 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Printf("%+v\n", string(b))
+
 	var t actionRequest
 
 	err = json.Unmarshal(b, &t)
