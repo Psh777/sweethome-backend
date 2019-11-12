@@ -52,7 +52,7 @@ func HandlerInterface(w http.ResponseWriter, data interface{}) {
 
 func HandlerInterfaceAssistant(w http.ResponseWriter, data interface{}) {
 	w = Headers(w)
-	Json, _ := json.Marshal(data)
+	Json, _ := json.MarshalIndent(data, "", " ")
 	_, _ = w.Write(Json)
 }
 
