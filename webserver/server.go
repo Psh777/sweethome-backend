@@ -25,6 +25,8 @@ func Init(myConfig types.MyConfig) {
 	router.Post("/alisa", http.HandlerFunc(alisaPostHandler))
 	router.Get("/alisa/v1.0/user/devices", http.HandlerFunc(alisaGetDevicesHandler))
 	router.Post("/alisa/v1.0/user/devices/action", http.HandlerFunc(alisaDevicesActionHandler))
+	router.Post("/alisa/v1.0/user/devices/query", http.HandlerFunc(alisaDevicesStateHandler))
+
 
 	//security
 	router.Get("/security/on", http.HandlerFunc(securityOnHandler))

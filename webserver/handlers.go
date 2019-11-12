@@ -49,6 +49,10 @@ func alisaDevicesActionHandler(w http.ResponseWriter, r *http.Request) {
 	alisa.Action(w,r)
 }
 
+func alisaDevicesStateHandler(w http.ResponseWriter, r *http.Request) {
+	alisa.DeviceState(w,r)
+}
+
 func securityOnHandler(w http.ResponseWriter, r *http.Request) {
 	telegram.SendMsgBot("Security ON")
 	handlers.HandlerInterface(w, "ok")
