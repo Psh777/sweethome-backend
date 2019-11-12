@@ -2,6 +2,7 @@ package alisa
 
 import (
 	"../../webserver/handlers"
+	"../psh_devices"
 	"../sonoff"
 	"encoding/json"
 	"fmt"
@@ -37,12 +38,32 @@ func Action(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Printf("%+v\n", t)
 
-	//switch
+	//action
 
-	if t.Payload.Devices[0].Capabilities[0].State.Value {
-		sonoff.Switch("on", t.Payload.Devices[0].ID)
-	} else {
-		sonoff.Switch("off", t.Payload.Devices[0].ID)
+	byteValue, _ := json.Marshal(t.Payload.Devices[0].Capabilities[0].State.Value)
+
+	switch t.Payload.Devices[0].Capabilities[0].Type {
+	case "devices.capabilities.on_off":
+
+		var val bool
+		_ = json.Unmarshal(byteValue, &val)
+
+		if val {
+			sonoff.Switch("on", t.Payload.Devices[0].ID)
+		} else {
+			sonoff.Switch("off", t.Payload.Devices[0].ID)
+		}
+
+
+	case "devices.capabilities.color_setting":
+
+		var val HSV
+		_ = json.Unmarshal(byteValue, &val)
+
+		psh_devices.SetColor(t.Payload.Devices[0].ID, val.H, val.S, val.V)
+
+	default:
+		return
 	}
 
 	// answer
@@ -89,10 +110,16 @@ type actionAnswer struct {
 
 type State struct {
 	Instance     string       `json:"instance"`
-	Value        bool         `json:"value"`
+	Value        interface{}  `json:"value"`
 	ActionResult ActionResult `json:"action_result"`
 }
 
 type ActionResult struct {
 	Status string `json:"status"`
+}
+
+type HSV struct {
+	H int `json:"h"`
+	S int `json:"s"`
+	V int `json:"v"`
 }

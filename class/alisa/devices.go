@@ -21,7 +21,25 @@ func Devices(w http.ResponseWriter, r *http.Request) {
 	for j := 0; j < len(dbDevises); j++ {
 
 		caps := make([]Capabilitie, 0)
-		caps = append(caps, Capabilitie{Type: dbDevises[j].AlisaCapabilities})
+
+		var par interface{}
+
+		switch dbDevises[j].AlisaCapabilities {
+		case "devices.capabilities.on_off":
+		case "devices.capabilities.color_setting":
+			par = Parameters{
+				ColorModel:   "rgb",
+				//TemperatureK: TemperatureK{
+				//	Min: 2700,
+				//	Max: 9000,
+				//},
+			}
+		}
+
+		caps = append(caps, Capabilitie{
+			Type:       dbDevises[j].AlisaCapabilities,
+			Parameters: par,
+		})
 
 		device := Device{
 			ID:           dbDevises[j].ID,
@@ -70,6 +88,18 @@ type Device struct {
 }
 
 type Capabilitie struct {
-	Type  string `json:"type"`
-	State State  `json:"state"`
+	Type       string      `json:"type"`
+	State      State       `json:"state"`
+	Parameters interface{} `json:"parameters"`
+}
+
+type Parameters struct {
+	ColorModel   string       `json:"color_model"`
+	TemperatureK TemperatureK `json:"temperature_k"`
+}
+
+type TemperatureK struct {
+	Min       int `json:"min"`
+	Max       int `json:"max"`
+	Precision int `json:"precision"`
 }
