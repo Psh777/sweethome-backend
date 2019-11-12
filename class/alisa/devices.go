@@ -25,16 +25,13 @@ func Devices(w http.ResponseWriter, r *http.Request) {
 
 		switch dbDevises[j].AlisaCapabilities {
 		case "devices.capabilities.on_off":
-
 			caps = append(caps, Capabilitie{
-				Type:       dbDevises[j].AlisaCapabilities,
-				Parameters: par,
+				Type: dbDevises[j].AlisaCapabilities,
 			})
 		case "devices.capabilities.color_setting":
 			//1
 			caps = append(caps, Capabilitie{
-				Type:       dbDevises[j].AlisaCapabilities,
-				Parameters: par,
+				Type: dbDevises[j].AlisaCapabilities,
 			})
 			//2
 			par = Parameters{
