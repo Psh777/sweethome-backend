@@ -46,8 +46,8 @@ type Device struct {
 
 type Capabilitie struct {
 	Type       string      `json:"type"`
-	State      State       `json:"state"`
-	Parameters interface{} `json:"parameters"`
+	State      State       `json:"state,omitempty"`
+	Parameters interface{} `json:"parameters,omitempty"`
 }
 
 type Parameters struct {
