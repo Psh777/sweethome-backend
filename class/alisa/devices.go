@@ -29,10 +29,10 @@ func Devices(w http.ResponseWriter, r *http.Request) {
 		case "devices.capabilities.color_setting":
 			par = Parameters{
 				ColorModel:   "rgb",
-				//TemperatureK: TemperatureK{
-				//	Min: 2700,
-				//	Max: 9000,
-				//},
+				TemperatureK: TemperatureK{
+					Min: 2700,
+					Max: 9000,
+				},
 			}
 		}
 
