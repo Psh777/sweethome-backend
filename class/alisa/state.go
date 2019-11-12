@@ -40,8 +40,8 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%+v\n", t)
 
 	//action
-	
-	devices := make([]Device, 0) 
+
+	devices := make([]Device, 0)
 
 	for j := 0; j < len(t.Devices); j++ {
 		dbDevice, err := postgres.GetDevice(t.Devices[j].ID)
@@ -65,8 +65,8 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 				Value:    v,
 			}
 			caps = append(caps, Capabilitie{
-				Type:       dbDevice.AlisaCapabilities,
-				State:      state,
+				Type:  "devices.capabilities.on_off",
+				State: state,
 			})
 
 		case "devices.capabilities.color_setting":
@@ -82,18 +82,18 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 				Value:    v,
 			}
 			caps = append(caps, Capabilitie{
-				Type:       dbDevice.AlisaCapabilities,
-				State:      state,
+				Type:  "devices.capabilities.on_off",
+				State: state,
 			})
 			//2
 			state = State{
-				Instance:     "rgb",
-				Value:        0,
+				Instance: "rgb",
+				Value:    0,
 			}
 
 			caps = append(caps, Capabilitie{
-				Type:       dbDevice.AlisaCapabilities,
-				State:      state,
+				Type:  "devices.capabilities.color_setting",
+				State: state,
 			})
 		}
 
@@ -102,7 +102,7 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ans := CreateDeviceAnswer(r.Header.Get("X-Request-Id"), devices)
-	bb, _:=json.Marshal(ans)
+	bb, _ := json.Marshal(ans)
 	fmt.Println(string(bb))
 	handlers.HandlerInterfaceAssistant(w, ans)
 

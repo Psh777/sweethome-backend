@@ -27,13 +27,11 @@ func Devices(w http.ResponseWriter, r *http.Request) {
 		case "devices.capabilities.on_off":
 			caps = append(caps, Capabilitie{
 				Type: "devices.capabilities.on_off",
-				State: nil,
 			})
 		case "devices.capabilities.color_setting":
 			//1
 			caps = append(caps, Capabilitie{
 				Type: "devices.capabilities.on_off",
-				State: nil,
 			})
 			//2
 			par = Parameters{
@@ -43,7 +41,6 @@ func Devices(w http.ResponseWriter, r *http.Request) {
 			caps = append(caps, Capabilitie{
 				Type:       "devices.capabilities.color_setting",
 				Parameters: par,
-				State: nil,
 			})
 		}
 
