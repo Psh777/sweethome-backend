@@ -10,13 +10,13 @@ type actionAnswer struct {
 }
 
 type State struct {
-	Instance     string       `json:"instance"`
-	Value        interface{}  `json:"value"`
-	ActionResult ActionResult `json:"action_result"`
+	Instance     string       `json:"instance,omitempty"`
+	Value        interface{}  `json:"value,omitempty"`
+	ActionResult ActionResult `json:"action_result,omitempty"`
 }
 
 type ActionResult struct {
-	Status string `json:"status"`
+	Status string `json:"status,omitempty"`
 }
 
 type HSV struct {
