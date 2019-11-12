@@ -37,10 +37,10 @@ type Payload struct {
 
 type Device struct {
 	ID           string        `json:"id"`
-	Name         string        `json:"name"`
-	Description  string        `json:"description"`
-	Room         string        `json:"room"`
-	Type         string        `json:"type"`
+	Name         string        `json:"name,omitempty"`
+	Description  string        `json:"description,omitempty"`
+	Room         string        `json:"room,omitempty"`
+	Type         string        `json:"type,omitempty"`
 	Capabilities []Capabilitie `json:"capabilities"`
 }
 
