@@ -16,6 +16,7 @@ func GetDevices() ([]types.DBDevice, error) {
 }
 
 func GetDevice(id string) (types.DBDevice, error) {
+	fmt.Println("Get device:", id)
 	var data types.DBDevice
 	err := DBX.Get(&data, "SELECT * FROM devices WHERE id = $1;", id)
 	if err != nil {

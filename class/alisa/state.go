@@ -102,6 +102,8 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ans := CreateDeviceAnswer(r.Header.Get("X-Request-Id"), devices)
+	bb, _:=json.Marshal(ans)
+	fmt.Println(string(bb))
 	handlers.HandlerInterfaceAssistant(w, ans)
 
 }
