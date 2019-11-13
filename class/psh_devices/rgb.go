@@ -16,15 +16,15 @@ func SetColor(deviceID string, setColor int64) {
 		return
 	}
 
-	hexColor := fmt.Sprintf("#%06x", setColor)
-	//c, err := colorful.Hex(hexColor)
-	c, err := ParseHexColor(hexColor)
+	hex := fmt.Sprintf("#%06x", setColor)
+	c, err := ParseHexColor(hex)
 	if err != nil {
-		fmt.Println(err)
 		return
 	}
+	a := "led?r="+fmt.Sprintf("%v",c.R)+"&g="+fmt.Sprint(c.G)+"&b="+fmt.Sprint(c.B)
+	fmt.Print(a, err)
 
-	_, err = http_request.POST(device.Url, "led?r="+fmt.Sprint(c.R)+"&g="+fmt.Sprint(c.G)+"&b"+fmt.Sprint(c.B), "")
+	_, err = http_request.POST(device.Url, a, "")
 
 	if err != nil {
 		fmt.Println(err)
