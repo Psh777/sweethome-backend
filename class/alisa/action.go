@@ -79,7 +79,15 @@ func Action(w http.ResponseWriter, r *http.Request) {
 				switch device.Capabilities[i].Type {
 				case "devices.capabilities.on_off":
 
-					psh_devices.Switch(device.ID, device.Capabilities[i].Type, val)
+					var val bool
+					_ = json.Unmarshal(byteValue, &val)
+
+					if val {
+						psh_devices.Switch(device.ID, device.Capabilities[i].Type, "on")
+					} else {
+						psh_devices.Switch(device.ID, device.Capabilities[i].Type, "off")
+					}
+
 
 				case "devices.capabilities.color_setting":
 

@@ -7,8 +7,8 @@ import (
 	"image/color"
 )
 
-func Switch(deviceID string, capabilities string, setColor int64) {
-	_ = postgres.SetState(deviceID, capabilities, fmt.Sprint(setColor))
+func Switch(deviceID string, capabilities string, state string) {
+	_ = postgres.SetState(deviceID, capabilities, state)
 }
 
 func SetColor(deviceID string, capabilities string, setColor int64) {
