@@ -17,7 +17,7 @@ func SetColor(deviceID string, setColor int64) {
 		return
 	}
 
-	hexColor := fmt.Sprintf("%x", setColor)
+	hexColor := fmt.Sprintf("#%x", setColor)
 	c, err := colorful.Hex(hexColor)
 	if err != nil {
 		fmt.Println(err)
