@@ -26,9 +26,20 @@ func GetDevice(id string) (types.DBDevice, error) {
 	return data, nil
 }
 
-func SetState(id, state string) error {
-	fmt.Println("Set State device:", id, state)
-	_, err := DBX.Exec("UPDATE devices SET state1 = $1 WHERE id = $2;", state, id)
+func GetCapabilities(deviceId string) ([]types.DBCapabilities, error) {
+	fmt.Println("Get capability:", deviceId)
+	data := make([]types.DBCapabilities, 0)
+	err := DBX.Get(&data, "SELECT * FROM capabilities WHERE device_id = $1;", deviceId)
+	if err != nil {
+		fmt.Println("get Devices: ", err)
+		return []types.DBCapabilities{}, err
+	}
+	return data, nil
+}
+
+func SetState(id, capabilities, state string) error {
+	fmt.Println("Set State device:", id, capabilities)
+	_, err := DBX.Exec("UPDATE capabilities SET state = $1 WHERE id = $2 and type = $3;", state, id, capabilities)
 	if err != nil {
 		fmt.Println("postgres UpdateState: ", err)
 		return err
@@ -36,12 +47,3 @@ func SetState(id, state string) error {
 	return nil
 }
 
-func SetState2(id, state string) error {
-	fmt.Println("Set State device:", id, state)
-	_, err := DBX.Exec("UPDATE devices SET state2 = $1 WHERE id = $2;", state, id)
-	if err != nil {
-		fmt.Println("postgres UpdateState: ", err)
-		return err
-	}
-	return nil
-}

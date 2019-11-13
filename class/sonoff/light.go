@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-func Switch(state, deviceID string) {
+func Switch(state, capabilities, deviceID string) {
 
 	data := Data{
 		Switch: state,
@@ -38,7 +38,7 @@ func Switch(state, deviceID string) {
 		return
 	}
 
-	_ = postgres.SetState(deviceID, state)
+	_ = postgres.SetState(deviceID, capabilities, state)
 
 	return
 }

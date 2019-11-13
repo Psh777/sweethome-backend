@@ -7,7 +7,7 @@ import (
 	"image/color"
 )
 
-func SetColor(deviceID string, setColor int64) {
+func SetColor(deviceID string, capabilities string, setColor int64) {
 
 	device, err := postgres.GetDevice(deviceID)
 
@@ -31,7 +31,7 @@ func SetColor(deviceID string, setColor int64) {
 		return
 	}
 
-	_ = postgres.SetState2(deviceID, fmt.Sprint(setColor))
+	_ = postgres.SetState(deviceID, capabilities, fmt.Sprint(setColor))
 
 	return
 }

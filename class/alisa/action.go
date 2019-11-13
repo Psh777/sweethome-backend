@@ -1,6 +1,7 @@
 package alisa
 
 import (
+	"../../db/postgres"
 	"../../webserver/handlers"
 	"../psh_devices"
 	"../sonoff"
@@ -40,29 +41,56 @@ func Action(w http.ResponseWriter, r *http.Request) {
 
 	//action
 
-	byteValue, _ := json.Marshal(t.Payload.Devices[0].Capabilities[0].State.Value)
+	for j := 0; j < len(t.Payload.Devices); j++ {
+		device := t.Payload.Devices[j]
 
-	switch t.Payload.Devices[0].Capabilities[0].Type {
-	case "devices.capabilities.on_off":
-
-		var val bool
-		_ = json.Unmarshal(byteValue, &val)
-
-		if val {
-			sonoff.Switch("on", t.Payload.Devices[0].ID)
-		} else {
-			sonoff.Switch("off", t.Payload.Devices[0].ID)
+		dbDevice, err := postgres.GetDevice(device.ID)
+		if err != nil {
+			handlers.HandlerError(w, "1")
+			return
 		}
 
+		byteValue, _ := json.Marshal(device.Capabilities[0].State.Value)
 
-	case "devices.capabilities.color_setting":
+		switch dbDevice.Type {
+		case "sonoff":
 
-		var val int64
-		_ = json.Unmarshal(byteValue, &val)
-		psh_devices.SetColor(t.Payload.Devices[0].ID, val)
+			for i := 0; i < len(device.Capabilities); i++ {
 
-	default:
-		return
+				switch device.Capabilities[i].Type {
+				case "devices.capabilities.on_off":
+
+					var val bool
+					_ = json.Unmarshal(byteValue, &val)
+
+					if val {
+						sonoff.Switch("on", device.Capabilities[i].Type, device.ID)
+					} else {
+						sonoff.Switch("off", device.Capabilities[i].Type, device.ID)
+					}
+				}
+
+			}
+
+		case "psh-rgb":
+
+			for i := 0; i < len(device.Capabilities); i++ {
+
+				switch device.Capabilities[i].Type {
+				case "devices.capabilities.on_off":
+
+				case "devices.capabilities.color_setting":
+
+					var val int64
+					_ = json.Unmarshal(byteValue, &val)
+					psh_devices.SetColor(device.ID, device.Capabilities[i].Type, val)
+
+				}
+
+			}
+
+		}
+
 	}
 
 	// answer

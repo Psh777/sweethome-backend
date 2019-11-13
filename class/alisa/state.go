@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 )
 
 func DeviceState(w http.ResponseWriter, r *http.Request) {
@@ -50,51 +51,47 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		dbCaps, err := postgres.GetCapabilities(t.Devices[j].ID)
+		if err != nil {
+			handlers.HandlerError(w, err.Error())
+			return
+		}
+
 		caps := make([]Capabilitie, 0)
 
-		switch dbDevice.AlisaCapabilities {
-		case "devices.capabilities.on_off":
-			var v bool
-			if dbDevice.State1 == "on" {
-				v = true
-			} else {
-				v = false
-			}
-			state := State{
-				Instance: "on",
-				Value:    v,
-			}
-			caps = append(caps, Capabilitie{
-				Type:  "devices.capabilities.on_off",
-				State: state,
-			})
+		for i := 0; i < len(dbCaps); i++ {
+			switch dbCaps[i].Type {
+			case "devices.capabilities.on_off":
+				var v bool
+				if dbCaps[i].State == "on" {
+					v = true
+				} else {
+					v = false
+				}
+				state := State{
+					Instance: dbCaps[i].Instans,
+					Value:    v,
+				}
+				caps = append(caps, Capabilitie{
+					Type:  "devices.capabilities.on_off",
+					State: state,
+				})
 
-		case "devices.capabilities.color_setting":
-			//1
-			var v bool
-			if dbDevice.State1 == "on" {
-				v = true
-			} else {
-				v = false
+			case "devices.capabilities.color_setting":
+				intState, err := strconv.ParseInt(dbCaps[i].State, 10, 64)
+				if err != nil {
+					fmt.Println(err)
+					return
+				}
+				state := State{
+					Instance: dbCaps[i].Instans,
+					Value:    intState,
+				}
+				caps = append(caps, Capabilitie{
+					Type:  "devices.capabilities.color_setting",
+					State: state,
+				})
 			}
-			state := State{
-				Instance: "on",
-				Value:    v,
-			}
-			caps = append(caps, Capabilitie{
-				Type:  "devices.capabilities.on_off",
-				State: state,
-			})
-			//2
-			state = State{
-				Instance: "rgb",
-				Value:    0,
-			}
-
-			caps = append(caps, Capabilitie{
-				Type:  "devices.capabilities.color_setting",
-				State: state,
-			})
 		}
 
 		devices = append(devices, CreateDevice(dbDevice, caps))
