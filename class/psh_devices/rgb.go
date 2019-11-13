@@ -5,6 +5,7 @@ import (
 	"../../modules/http_request"
 	"fmt"
 	"image/color"
+	"strconv"
 )
 
 func Switch(deviceID string, capabilities string, state string) {
@@ -31,6 +32,21 @@ func Switch(deviceID string, capabilities string, state string) {
 			fmt.Println(err)
 			return
 		}
+
+	} else {
+
+		caps, _ := postgres.GetCapabilities(deviceID)
+		for i := 0; i < len(caps); i++ {
+			if caps[i].Instance == "rgb" {
+				intState, err := strconv.ParseInt(caps[i].State, 10, 64)
+				if err != nil {
+					fmt.Println(err)
+					return
+				}
+				SetColor(deviceID, capabilities, intState)
+			}
+		}
+
 	}
 
 	_ = postgres.SetState(deviceID, capabilities, state)
