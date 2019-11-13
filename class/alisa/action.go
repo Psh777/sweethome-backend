@@ -56,10 +56,9 @@ func Action(w http.ResponseWriter, r *http.Request) {
 
 	case "devices.capabilities.color_setting":
 
-		var val HSV
+		var val int64
 		_ = json.Unmarshal(byteValue, &val)
-
-		psh_devices.SetColor(t.Payload.Devices[0].ID, val.H, val.S, val.V)
+		psh_devices.SetColor(t.Payload.Devices[0].ID, val)
 
 	default:
 		return
