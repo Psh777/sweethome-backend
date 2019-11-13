@@ -22,7 +22,7 @@ func SetColor(deviceID string, capabilities string, setColor int64) {
 		return
 	}
 	a := "led?r="+fmt.Sprintf("%v",c.R)+"&g="+fmt.Sprint(c.G)+"&b="+fmt.Sprint(c.B)
-	fmt.Print(a, err)
+	fmt.Println(a, err)
 
 	_, err = http_request.GET(device.Url, a)
 

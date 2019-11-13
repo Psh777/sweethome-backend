@@ -38,7 +38,7 @@ func GetCapabilities(deviceId string) ([]types.DBCapabilities, error) {
 }
 
 func SetState(id, capabilities, state string) error {
-	fmt.Println("Set State device:", id, capabilities)
+	fmt.Println("Set State device:", id, capabilities, state)
 	_, err := DBX.Exec("UPDATE capabilities SET state = $1 WHERE device_id = $2 and type = $3;", state, id, capabilities)
 	if err != nil {
 		fmt.Println("postgres UpdateState: ", err)
