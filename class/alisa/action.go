@@ -41,7 +41,12 @@ func Action(w http.ResponseWriter, r *http.Request) {
 
 	//action
 
+	devices := make([]Device, 0)
+
 	for j := 0; j < len(t.Payload.Devices); j++ {
+
+		caps := make([]Capabilitie, 0)
+
 		device := t.Payload.Devices[j]
 
 		dbDevice, err := postgres.GetDevice(device.ID)
@@ -68,6 +73,17 @@ func Action(w http.ResponseWriter, r *http.Request) {
 					} else {
 						sonoff.Switch("off", device.Capabilities[i].Type, device.ID)
 					}
+
+					caps = append(caps, Capabilitie{
+						Type: "devices.capabilities.on_off",
+						State: State{
+							Instance: t.Payload.Devices[j].Capabilities[i].State.Instance,
+							ActionResult: ActionResult{
+								Status: "DONE",
+							},
+						},
+					})
+
 				}
 
 			}
@@ -97,30 +113,28 @@ func Action(w http.ResponseWriter, r *http.Request) {
 
 				}
 
+				caps = append(caps, Capabilitie{
+					Type: "devices.capabilities.on_off",
+					State: State{
+						Instance: t.Payload.Devices[j].Capabilities[i].State.Instance,
+						ActionResult: ActionResult{
+							Status: "DONE",
+						},
+					},
+				})
+
 			}
 
 		}
 
+
+		devices = append(devices, Device{
+			ID:           t.Payload.Devices[0].ID,
+			Capabilities: caps,
+		})
+
 	}
 
-	// answer
-
-	caps := make([]Capabilitie, 0)
-	caps = append(caps, Capabilitie{
-		Type: "devices.capabilities.on_off",
-		State: State{
-			Instance: t.Payload.Devices[0].Capabilities[0].State.Instance,
-			ActionResult: ActionResult{
-				Status: "DONE",
-			},
-		},
-	})
-
-	devices := make([]Device, 0)
-	devices = append(devices, Device{
-		ID:           t.Payload.Devices[0].ID,
-		Capabilities: caps,
-	})
 
 	ans := CreateDeviceAnswer(r.Header.Get("X-Request-Id"), devices)
 	handlers.HandlerInterfaceAssistant(w, ans)
