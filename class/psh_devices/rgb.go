@@ -5,7 +5,8 @@ import (
 	"../../modules/http_request"
 	"fmt"
 )
-import "gopkg.in/go-playground/colors.v1"
+
+import "github.com/lucasb-eyer/go-colorful"
 
 func SetColor(deviceID string, setColor int64) {
 
@@ -17,10 +18,13 @@ func SetColor(deviceID string, setColor int64) {
 	}
 
 	hexColor := fmt.Sprintf("%x", setColor)
-	color, err := colors.Parse(hexColor)
-	col := color.ToRGB()
+	c, err := colorful.Hex(hexColor)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
-	_, err = http_request.POST(device.Url, "/led?r="+fmt.Sprint(col.R)+"&g="+fmt.Sprint(col.G)+"&b"+fmt.Sprint(col.B), "")
+	_, err = http_request.POST(device.Url, "/led?r="+fmt.Sprint(c.R)+"&g="+fmt.Sprint(c.G)+"&b"+fmt.Sprint(c.B), "")
 
 	if err != nil {
 		fmt.Println(err)
