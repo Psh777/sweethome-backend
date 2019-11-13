@@ -47,7 +47,7 @@ func Devices(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 				par = Parameters{
-					ColorModel: dbCaps[i].Instans,
+					ColorModel: dbCaps[i].Instance,
 					Value: intState,
 				}
 				caps = append(caps, Capabilitie{

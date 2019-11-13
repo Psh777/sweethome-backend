@@ -69,7 +69,7 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 					v = false
 				}
 				state := State{
-					Instance: dbCaps[i].Instans,
+					Instance: dbCaps[i].Instance,
 					Value:    v,
 				}
 				caps = append(caps, Capabilitie{
@@ -84,7 +84,7 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 				state := State{
-					Instance: dbCaps[i].Instans,
+					Instance: dbCaps[i].Instance,
 					Value:    intState,
 				}
 				caps = append(caps, Capabilitie{
