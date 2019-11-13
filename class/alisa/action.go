@@ -114,7 +114,7 @@ func Action(w http.ResponseWriter, r *http.Request) {
 				}
 
 				caps = append(caps, Capabilitie{
-					Type: "devices.capabilities.on_off",
+					Type: device.Capabilities[i].Type,
 					State: State{
 						Instance: t.Payload.Devices[j].Capabilities[i].State.Instance,
 						ActionResult: ActionResult{
@@ -126,7 +126,6 @@ func Action(w http.ResponseWriter, r *http.Request) {
 			}
 
 		}
-
 
 		devices = append(devices, Device{
 			ID:           t.Payload.Devices[0].ID,
