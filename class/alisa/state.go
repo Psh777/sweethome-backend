@@ -55,7 +55,7 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 		switch dbDevice.AlisaCapabilities {
 		case "devices.capabilities.on_off":
 			var v bool
-			if dbDevice.State == "on" {
+			if dbDevice.State1 == "on" {
 				v = true
 			} else {
 				v = false
@@ -72,7 +72,7 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 		case "devices.capabilities.color_setting":
 			//1
 			var v bool
-			if dbDevice.State == "on" {
+			if dbDevice.State1 == "on" {
 				v = true
 			} else {
 				v = false
