@@ -134,7 +134,6 @@ func Action(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-
 	ans := CreateDeviceAnswer(r.Header.Get("X-Request-Id"), devices)
 	handlers.HandlerInterfaceAssistant(w, ans)
 

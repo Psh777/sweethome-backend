@@ -8,7 +8,33 @@ import (
 )
 
 func Switch(deviceID string, capabilities string, state string) {
+
+	device, err := postgres.GetDevice(deviceID)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	if state == "off" {
+
+		c, err := ParseHexColor("#000000")
+		if err != nil {
+			return
+		}
+
+		a := "led?r=" + fmt.Sprintf("%v", c.R) + "&g=" + fmt.Sprint(c.G) + "&b=" + fmt.Sprint(c.B)
+		fmt.Println(a, err)
+		_, err = http_request.GET(device.Url, a)
+
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+	}
+
 	_ = postgres.SetState(deviceID, capabilities, state)
+
 }
 
 func SetColor(deviceID string, capabilities string, setColor int64) {
@@ -25,7 +51,7 @@ func SetColor(deviceID string, capabilities string, setColor int64) {
 	if err != nil {
 		return
 	}
-	a := "led?r="+fmt.Sprintf("%v",c.R)+"&g="+fmt.Sprint(c.G)+"&b="+fmt.Sprint(c.B)
+	a := "led?r=" + fmt.Sprintf("%v", c.R) + "&g=" + fmt.Sprint(c.G) + "&b=" + fmt.Sprint(c.B)
 	fmt.Println(a, err)
 
 	_, err = http_request.GET(device.Url, a)
