@@ -79,6 +79,8 @@ func Action(w http.ResponseWriter, r *http.Request) {
 				switch device.Capabilities[i].Type {
 				case "devices.capabilities.on_off":
 
+					psh_devices.Switch(device.ID, device.Capabilities[i].Type, val)
+
 				case "devices.capabilities.color_setting":
 
 					var val int64
