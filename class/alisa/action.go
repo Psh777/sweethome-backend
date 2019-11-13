@@ -54,6 +54,8 @@ func Action(w http.ResponseWriter, r *http.Request) {
 			sonoff.Switch("off", t.Payload.Devices[0].ID)
 		}
 
+
+
 	case "devices.capabilities.color_setting":
 
 		var val int64

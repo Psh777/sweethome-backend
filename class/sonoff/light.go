@@ -38,6 +38,8 @@ func Switch(state, deviceID string) {
 		return
 	}
 
+	_ = postgres.SetState(deviceID, state)
+
 	return
 }
 
