@@ -31,6 +31,8 @@ func SetColor(deviceID string, setColor int64) {
 		return
 	}
 
+	_ = postgres.SetState2(deviceID, fmt.Sprint(setColor))
+
 	return
 }
 

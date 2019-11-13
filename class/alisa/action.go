@@ -55,7 +55,6 @@ func Action(w http.ResponseWriter, r *http.Request) {
 		}
 
 
-
 	case "devices.capabilities.color_setting":
 
 		var val int64

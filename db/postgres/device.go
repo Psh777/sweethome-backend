@@ -35,3 +35,13 @@ func SetState(id, state string) error {
 	}
 	return nil
 }
+
+func SetState2(id, state string) error {
+	fmt.Println("Set State device:", id, state)
+	_, err := DBX.Exec("UPDATE devices SET state2 = $1 WHERE id = $2;", state, id)
+	if err != nil {
+		fmt.Println("postgres UpdateState: ", err)
+		return err
+	}
+	return nil
+}

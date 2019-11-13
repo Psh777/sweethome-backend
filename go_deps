@@ -3,4 +3,3 @@ github.com/jmoiron/sqlx
 github.com/lib/pq
 github.com/go-telegram-bot-api/telegram-bot-api
 github.com/bmizerany/pat
-github.com/lucasb-eyer/go-colorful
