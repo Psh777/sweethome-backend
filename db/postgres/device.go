@@ -29,7 +29,7 @@ func GetDevice(id string) (types.DBDevice, error) {
 func GetCapabilities(deviceId string) ([]types.DBCapabilities, error) {
 	fmt.Println("Get capability:", deviceId)
 	data := make([]types.DBCapabilities, 0)
-	err := DBX.Get(&data, "SELECT * FROM capabilities WHERE device_id = $1;", deviceId)
+	err := DBX.Select(&data, "SELECT * FROM capabilities WHERE device_id = $1;", deviceId)
 	if err != nil {
 		fmt.Println("get Devices: ", err)
 		return []types.DBCapabilities{}, err
