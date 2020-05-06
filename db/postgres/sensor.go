@@ -3,11 +3,12 @@ package postgres
 import (
 	"../../types"
 	"fmt"
+	"time"
 )
 
 func NewData(sensor types.Sensor) error {
 
-	row1 := DBX.QueryRow("UPDATE sensors SET update_timestamp = now(), alive = $1, request_id = $2 WHERE id = $3 RETURNING id;", sensor.Alive, sensor.RequestID, sensor.SensorID)
+	row1 := DBX.QueryRow("UPDATE sensors SET update_timestamp = $1, alive = $2, request_id = $3 WHERE id = $4 RETURNING id;", time.Now(), sensor.Alive, sensor.RequestID, sensor.SensorID)
 	var id string
 	err := row1.Scan(&id)
 	if err != nil {
