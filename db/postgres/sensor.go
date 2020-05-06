@@ -8,7 +8,7 @@ import (
 
 func NewData(sensor types.Sensor) (time.Time, error) {
 
-	row1 := DBX.QueryRow("UPDATE sensors SET update_timestamp = localtimestamp, alive = $1, request_id = $2 WHERE id = $3 RETURNING localtimestamp;", sensor.Alive, sensor.RequestID, sensor.SensorID)
+	row1 := DBX.QueryRow("UPDATE sensors SET update_timestamp = localtimestamp AT TIME ZONE 'UTC', alive = $1, request_id = $2 WHERE id = $3 RETURNING localtimestamp;", sensor.Alive, sensor.RequestID, sensor.SensorID)
 	var now time.Time
 	err := row1.Scan(&now)
 	if err != nil {
@@ -66,7 +66,7 @@ func GetDataByRequestID(requestID string) ([]types.SensorData, error) {
 
 func GetSensors() ([]types.Sensor, error) {
 	data := make([]types.Sensor, 0)
-	err := DBX.Select(&data, "SELECT *, localtimestamp as time_now FROM sensors;")
+	err := DBX.Select(&data, "SELECT *, localtimestamp AT TIME ZONE 'UTC' as time_now FROM sensors;")
 	if err != nil {
 		fmt.Println("get Sensors: ", err)
 		return nil, err
