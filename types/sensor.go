@@ -1,5 +1,7 @@
 package types
 
+import "time"
+
 type Sensor struct {
 	SensorID        string       `json:"sensor_id"        db:"id"`
 	Comment         string       `json:"comment"          db:"comment"`
@@ -8,7 +10,8 @@ type Sensor struct {
 	Data            []SensorData `json:"data"`
 	RequestID       string       `json:"request_id"       db:"request_id"`
 	Enable          bool         `json:"enable"           db:"enable"`
-	UpdateTimestamp string       `json:"update_timestamp" db:"update_timestamp"`
+	UpdateTimestamp time.Time    `json:"update_timestamp" db:"update_timestamp"`
+	TimeNow         time.Time    `json:"time_now"         db:"time_now"`
 }
 
 type SensorData struct {

@@ -48,10 +48,26 @@ func Devices(w http.ResponseWriter, r *http.Request) {
 				}
 				par = Parameters{
 					ColorModel: dbCaps[i].Instance,
-					Value: intState,
+					Value:      intState,
 				}
 				caps = append(caps, Capabilitie{
 					Type:       "devices.capabilities.color_setting",
+					Parameters: par,
+				})
+
+			case "devices.capabilities.range":
+
+				par = Parameters{
+					Instance: "brightness",
+					Unit:     "unit.percent",
+					Range: Range{
+						Min: 0,
+						Max: 100,
+						Precision: 10,
+					},
+				}
+				caps = append(caps, Capabilitie{
+					Type:       "devices.capabilities.range",
 					Parameters: par,
 				})
 

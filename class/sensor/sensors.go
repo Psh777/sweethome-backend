@@ -13,6 +13,7 @@ func GetSensors(w http.ResponseWriter, _ *http.Request) {
 		handlers.HandlerError(w, err.Error())
 		return
 	}
+
 	handlers.HandlerInterface(w, SensorsOut{
 		Sensors: sensors,
 	})

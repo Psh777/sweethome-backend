@@ -68,7 +68,7 @@ func SetColor(deviceID string, capabilities string, setColor int64) {
 		fmt.Println(err)
 		return
 	}
-	a := "led?r=" + fmt.Sprintf("%v", c.R) + "&g=" + fmt.Sprint(c.G) + "&b=" + fmt.Sprint(c.B)
+	a := "color?r=" + fmt.Sprintf("%v", c.R) + "&g=" + fmt.Sprint(c.G) + "&b=" + fmt.Sprint(c.B)
 	fmt.Println(a, err)
 
 	_, err = http_request.GET(device.Url, a)
@@ -80,6 +80,28 @@ func SetColor(deviceID string, capabilities string, setColor int64) {
 	_ = postgres.SetState(deviceID, capabilities, fmt.Sprint(setColor))
 
 	return
+}
+
+func SetBrightness(deviceID string, capabilities string, data int64) {
+
+	device, err := postgres.GetDevice(deviceID)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	a := "brightness?range=" + fmt.Sprintf("%v", data)
+	fmt.Println(a, err)
+
+	_, err = http_request.GET(device.Url, a)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	_ = postgres.SetState(deviceID, capabilities, fmt.Sprint(data))
+
 }
 
 func ParseHexColor(s string) (c color.RGBA, err error) {

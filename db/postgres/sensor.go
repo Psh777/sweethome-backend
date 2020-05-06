@@ -65,7 +65,7 @@ func GetDataByRequestID(requestID string) ([]types.SensorData, error) {
 
 func GetSensors() ([]types.Sensor, error) {
 	data := make([]types.Sensor, 0)
-	err := DBX.Select(&data, "SELECT * FROM sensors;")
+	err := DBX.Select(&data, "SELECT *, now() FROM sensors;")
 	if err != nil {
 		fmt.Println("get Sensors: ", err)
 		return nil, err

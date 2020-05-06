@@ -91,7 +91,25 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 					Type:  "devices.capabilities.color_setting",
 					State: state,
 				})
+
+			case "devices.capabilities.range":
+				intState, err := strconv.ParseInt(dbCaps[i].State, 10, 64)
+				if err != nil {
+					fmt.Println(err)
+					return
+				}
+				state := State{
+					Instance: dbCaps[i].Instance,
+					Value:    intState,
+				}
+				caps = append(caps, Capabilitie{
+					Type:  "devices.capabilities.range",
+					State: state,
+				})
 			}
+
+
+
 		}
 
 		devices = append(devices, CreateDevice(dbDevice, caps))

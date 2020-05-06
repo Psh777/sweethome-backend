@@ -52,11 +52,20 @@ type Capabilitie struct {
 
 type Parameters struct {
 	ColorModel string `json:"color_model,omitempty"`
+	Instance   string `json:"instance,omitempty"`
 	//TemperatureK TemperatureK `json:"temperature_k"`
-	Value int64 `json:"value,omitempty"`
+	Value int64  `json:"value,omitempty"`
+	Range Range  `json:"range,omitempty"`
+	Unit  string `json:"unit,omitempty"`
 }
 
 type TemperatureK struct {
+	Min       int `json:"min"`
+	Max       int `json:"max"`
+	Precision int `json:"precision"`
+}
+
+type Range struct {
 	Min       int `json:"min"`
 	Max       int `json:"max"`
 	Precision int `json:"precision"`
