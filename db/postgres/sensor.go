@@ -8,7 +8,7 @@ import (
 
 func NewData(sensor types.Sensor) (time.Time, error) {
 
-	row1 := DBX.QueryRow("UPDATE sensors SET update_timestamp = localtimestamp AT TIME ZONE 'UTC', alive = $1, request_id = $2 WHERE id = $3 RETURNING localtimestamp;", sensor.Alive, sensor.RequestID, sensor.SensorID)
+	row1 := DBX.QueryRow("UPDATE sensors SET update_timestamp = now(), alive = $1, request_id = $2 WHERE id = $3 RETURNING localtimestamp;", sensor.Alive, sensor.RequestID, sensor.SensorID)
 	var now time.Time
 	err := row1.Scan(&now)
 	if err != nil {
