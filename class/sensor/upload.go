@@ -38,8 +38,11 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 			handlers.HandlerError(w, "request ID invalid")
 			return
 		}
-
-		err = postgres.NewData(t)
-		handlers.HandlerSuccess(w, "ok")
+		nowtime, err := postgres.NewData(t)
+		if err != nil {
+			handlers.HandlerError(w, "1")
+			return
+		}
+		handlers.HandlerSuccess(w, "ok" + nowtime.String())
 	}
 }
