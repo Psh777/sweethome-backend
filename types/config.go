@@ -14,6 +14,7 @@ type Env struct {
 	HttpPort            string `json:"http_port"`
 	TelegramBot         string `json:"telegram_bot"`
 	SecurityBackend     string `json:"security_backend"`
+	FitoBackend         string `json:"fito_backend"`
 	DialogFlowProjectID string `json:"dialog_flow_project_id"`
 }
 

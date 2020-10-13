@@ -1,6 +1,7 @@
 package telegram
 
 import (
+	"../../class/fito"
 	"../../class/security"
 	"../../db/postgres"
 	"../../types"
@@ -96,19 +97,34 @@ func RunBot(myconfig types.MyConfig) {
 
 		switch strings.ToLower(fraza[0]) {
 
-		case "on":
+		case "sequrity":
 
-			result, _ := security.SetOn()
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, result)
-			_, _ = bot.Send(msg)
+			if fraza[1] == "on" {
+				result, _ := security.SetOn()
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, result)
+				_, _ = bot.Send(msg)
+			}
+			if fraza[1] == "off" {
+				result, _ := security.SetOff()
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, result)
+				_, _ = bot.Send(msg)
+			}
 
-		case "off":
+		case "fito":
 
-			result, _ := security.SetOff()
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, result)
-			_, _ = bot.Send(msg)
+			if fraza[1] == "on" {
+				result, _ := fito.SetOn()
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, result)
+				_, _ = bot.Send(msg)
+			}
+			if fraza[1] == "off" {
+				result, _ := fito.SetOff()
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, result)
+				_, _ = bot.Send(msg)
+			}
 
 		}
+
 	}
 
 }
@@ -140,4 +156,3 @@ func ChangeStatus(status bool) string {
 	}
 	return "ER"
 }
-
