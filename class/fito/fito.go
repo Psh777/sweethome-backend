@@ -35,7 +35,7 @@ func SetOff() (string, error) {
 
 	fmt.Println("GO off")
 	c := config.GetMyConfig()
-	ansJson, err := http_request.GET(c.Env.FitoBackend, "relay/4/on")
+	ansJson, err := http_request.GET(c.Env.FitoBackend, "relay/4/off")
 
 	fmt.Println(string(ansJson), err)
 	if err != nil {
