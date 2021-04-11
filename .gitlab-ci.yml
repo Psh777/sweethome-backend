@@ -12,6 +12,7 @@ deploy to stage:
   environment: stage
   script:
     - export GO111MODULE=auto;
+    - pwd;
     - *get-deps
     - sudo go build main.go
     - sudo rm -Rf /var/www/sweethome/backend/*
