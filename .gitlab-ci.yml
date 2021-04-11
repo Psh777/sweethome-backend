@@ -2,9 +2,8 @@ variables:
   GIT_SSL_NO_VERIFY: "true"
 
 .get-deps: &get-deps |
-  # This is a shell multi-line script to be included
   for dep in $(cat go_deps);
-    do /usr/local/go/bin/go get $dep;
+    do /usr/local/go/bin/go get -u $dep;
   done
 
 
@@ -12,8 +11,6 @@ deploy to stage:
   environment: stage
   script:
     - export GO111MODULE=auto;
-    - pwd
-    - ls class
     - *get-deps
     - sudo go build main.go
     - sudo rm -Rf /var/www/sweethome/backend/*
