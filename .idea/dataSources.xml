@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="sweethome@95.183.55.254" uuid="f9ac46dc-b3e4-44b6-a685-99ffa07790b8">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://95.183.55.254:5436/sweethome</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="sweet_home@localhost" uuid="4dc55a1a-4153-4c84-a73d-499575f1a8d2">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:54320/sweet_home</jdbc-url>
+    </data-source>
+  </component>
+</project>
