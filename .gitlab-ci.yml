@@ -2,6 +2,7 @@ variables:
   GIT_SSL_NO_VERIFY: "true"
 
 .get-deps: &get-deps |
+  # GO DEPS
   for dep in $(cat go_deps);
     do /usr/local/go/bin/go get -u $dep;
   done
