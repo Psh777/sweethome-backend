@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c34f30bb-22ff-4abf-a65c-0a2589ecad0b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +19,14 @@
   <component name="GOROOT" path="/usr/local/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1SwPAandzwodnfYlO54EOQKbztG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -65,39 +71,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588701298140">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1588701298140" />
-    <state width="958" height="254" key="GridCell.Tab.0.bottom" timestamp="1588771636439">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="958" height="254" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1588771636439" />
-    <state width="958" height="254" key="GridCell.Tab.0.center" timestamp="1588771636438">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="958" height="254" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1588771636438" />
-    <state width="958" height="254" key="GridCell.Tab.0.left" timestamp="1588771636436">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="958" height="254" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1588771636436" />
-    <state width="958" height="254" key="GridCell.Tab.0.right" timestamp="1588771636439">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="958" height="254" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1588771636439" />
-    <state x="449" y="210" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1588725981408">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="449" y="210" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1440.900@0.0.1440.900" timestamp="1588725981408" />
-    <state x="503" y="374" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588701296555">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="503" y="374" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1588701296555" />
-    <state x="378" y="207" width="683" height="490" key="find.popup" timestamp="1597266867468">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="378" y="207" width="683" height="490" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1597266867468" />
   </component>
 </project>
