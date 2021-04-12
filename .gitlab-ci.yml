@@ -4,7 +4,7 @@ variables:
 .get-deps: &get-deps |
   # GO DEPS
   for dep in $(cat go_deps);
-    do sudo go get -u $dep;
+    do sudo go get $dep;
   done
 
 
