@@ -20,8 +20,17 @@ jobs:
         - name: Golang Ext
           run: |
             go version;
-            export GO111MODULE=auto;
+            export GO111MODULE=off;
             $GOPATH;
             env | grep -E "GO|PATH";
+        - name: Go Deps
+          run: |
+            go get github.com/asaskevich/govalidator;
+            go get github.com/jmoiron/sqlx;
+            go get github.com/lib/pq;
+            go get github.com/go-telegram-bot-api/telegram-bot-api;
+            go get github.com/bmizerany/pat;
+        - name: Build
+          run: go build main.go
         - name: Checkout code
           uses: actions/checkout@v2
