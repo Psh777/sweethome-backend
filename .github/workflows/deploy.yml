@@ -18,10 +18,10 @@ jobs:
           with:
             go-version: ${{ matrix.go-version }}
         - name: Golang Ext
-           run: |
-             go version;
-             export GO111MODULE=auto;
-             $GOPATH;
-             env | grep -E "GO|PATH";
+          run: |
+            go version;
+            export GO111MODULE=auto;
+            $GOPATH;
+            env | grep -E "GO|PATH";
         - name: Checkout code
-        uses: actions/checkout@v2
+          uses: actions/checkout@v2
