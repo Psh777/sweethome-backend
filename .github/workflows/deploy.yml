@@ -6,12 +6,12 @@ on:
       - master
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         go: [ '1.16.x' ]
-    name: Go ${{ matrix.go }} sample
+    name: Go ${{ matrix.go }}
     steps:
         - name: Install Golang
           uses: actions/setup-go@v2
