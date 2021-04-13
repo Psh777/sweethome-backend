@@ -13,6 +13,7 @@ jobs:
         go: [ '1.16.x' ]
     name: Go ${{ matrix.go }}
     steps:
+        - uses: actions/checkout@v2
         - name: Install Golang
           uses: actions/setup-go@v2
           with:
@@ -36,5 +37,3 @@ jobs:
 #            go get github.com/bmizerany/pat;
         - name: Build
           run: go build main.go
-        - name: Checkout code
-          uses: actions/checkout@v2
