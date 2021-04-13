@@ -46,5 +46,3 @@ jobs:
               source: "main,static"
               target: "/var/www/sweethome/backend"
               strip_components: 1
-              - name: Print Info
-                run: echo "Deployed"
