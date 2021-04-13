@@ -7,19 +7,21 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
-    steps:
-      - name: Install Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: ${{ matrix.go-version }}
-      - name: Go Ext
-        run: go version
-      - run: export GO111MODULE=auto;
-      - run: $GOPATH;
-      - run: env | grep -E "GO|PATH";
-      - name: Checkout code
+        go-version: [ 1.16.x ]
+        os: [ ubuntu-latest ]
+      runs-on: ${{ matrix.os }}
+      steps:
+        - name: Install Golang
+          uses: actions/setup-go@v2
+          with:
+            go-version: ${{ matrix.go-version }}
+        - name: Golang Ext
+           run: |
+             go version;
+             export GO111MODULE=auto;
+             $GOPATH;
+             env | grep -E "GO|PATH";
+        - name: Checkout code
         uses: actions/checkout@v2
