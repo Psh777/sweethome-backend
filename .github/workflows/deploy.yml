@@ -24,7 +24,10 @@ jobs:
             $GOPATH;
             env | grep -E "GO|PATH";
             ls;
-#        - name: Go Deps
+        - name: Ls
+            run: ls;
+
+      #        - name: Go Deps
 #          run: |
 #            go get github.com/asaskevich/govalidator;
 #            go get github.com/jmoiron/sqlx;
