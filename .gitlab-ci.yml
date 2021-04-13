@@ -7,7 +7,6 @@ variables:
     do sudo go get $dep;
   done
 
-
 deploy to stage:
   environment: stage
   script:
