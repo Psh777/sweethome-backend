@@ -1,0 +1,27 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Go Ext
+        script: |
+            - go version;
+            - export GO111MODULE=auto;
+            - $GOPATH;
+            - env | grep -E "GO|PATH";
+      - name: Checkout code
+        uses: actions/checkout@v2
