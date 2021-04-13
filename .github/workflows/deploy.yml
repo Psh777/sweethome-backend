@@ -36,3 +36,15 @@ jobs:
             go get github.com/bmizerany/pat;
         - name: Build
           run: go build main.go
+        - name: Deploy to Server
+            uses: appleboy/scp-action@master
+            with:
+              host: ${{ secrets.HOST }} #95.183.55.254
+              port: ${{ secrets.PORT }} #22
+              username: ${{ secrets.USERNAME }} #psh
+              key: ${{ secrets.key2 }}
+              source: "main,static"
+              target: "/var/www/sweethome/backend"
+              strip_components: 1
+              - name: Print Info
+                run: echo "Deployed"
