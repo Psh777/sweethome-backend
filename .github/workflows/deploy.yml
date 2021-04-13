@@ -45,4 +45,3 @@ jobs:
             key: ${{ secrets.KEY }}
             source: "main,static"
             target: "/var/www/sweethome/backend"
-            strip_components: 1
