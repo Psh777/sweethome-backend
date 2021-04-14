@@ -11,10 +11,10 @@ jobs:
     strategy:
       matrix:
         go: [ '1.16.x' ]
-    name: Go ${{ matrix.go }}
+    name: Build & Deploy
     steps:
         - uses: actions/checkout@v2
-        - name: Install Golang
+        - name: Install Golang ${{ matrix.go }}
           uses: actions/setup-go@v2
           with:
             go-version: ${{ matrix.go-version }}
