@@ -46,6 +46,7 @@ jobs:
             source: "main,static"
             target: "/var/www/sweethome/backend"
   restart:
+    needs: deploy
     name: "Restart Services"
     runs-on: ubuntu-latest
     steps:
