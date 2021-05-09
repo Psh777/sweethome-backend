@@ -27,11 +27,10 @@ func Init(myConfig types.MyConfig) {
 	router.Post("/alisa/v1.0/user/devices/action", http.HandlerFunc(alisaDevicesActionHandler))
 	router.Post("/alisa/v1.0/user/devices/query", http.HandlerFunc(alisaDevicesStateHandler))
 
-
 	//security
 	router.Get("/security/on", http.HandlerFunc(securityOnHandler))
 	router.Get("/security/off", http.HandlerFunc(securityOffHandler))
-	router.Get("/security/alarm/:zone", http.HandlerFunc(securityAlarmHandler))
+	router.Get("/security/alarm/:zone/:sensortype", http.HandlerFunc(securityAlarmHandler))
 
 	fmt.Println("====================================================")
 	fmt.Println("ListenAndServe : " + myConfig.Env.HttpPort)
