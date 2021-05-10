@@ -31,7 +31,7 @@ func Init(myConfig types.MyConfig) {
 	router.Get("/security/on", http.HandlerFunc(securityOnHandler))
 	router.Get("/security/off", http.HandlerFunc(securityOffHandler))
 	router.Get("/security/alarm/:zone/:sensortype/:zonename", http.HandlerFunc(securityAlarmHandler))
-	router.Get("/message", http.HandlerFunc(messageHandler))
+	router.Post("/message", http.HandlerFunc(messageHandler))
 
 	fmt.Println("====================================================")
 	fmt.Println("ListenAndServe : " + myConfig.Env.HttpPort)
