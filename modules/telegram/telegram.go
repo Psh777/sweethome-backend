@@ -26,12 +26,12 @@ func RunBot(myconfig types.MyConfig) {
 		return
 	}
 
-	SendMsgBot("Backend restart!")
-
 	chatIds, err = postgres.GetChatID()
 	if err != nil {
 		return
 	}
+
+	SendMsgBot("Backend restart!")
 
 	bot.Debug = false
 
