@@ -17,7 +17,7 @@ import (
 var bot *tgbotapi.BotAPI
 var chatIds []int64
 
-func RunBot(myconfig types.MyConfig) {
+func RunBot(myconfig types.MyConfig, ver string) {
 
 	var err error
 	bot, err = tgbotapi.NewBotAPI(myconfig.Env.TelegramBot)
@@ -31,7 +31,7 @@ func RunBot(myconfig types.MyConfig) {
 		return
 	}
 
-	SendMsgBot("Backend restart")
+	SendMsgBot("Backend restart " + ver)
 
 	bot.Debug = false
 

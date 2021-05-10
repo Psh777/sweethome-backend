@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c34f30bb-22ff-4abf-a65c-0a2589ecad0b" name="Default Changelist" comment="">
+    <list default="true" id="c34f30bb-22ff-4abf-a65c-0a2589ecad0b" name="Default Changelist" comment="update">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/telegram/telegram.go" beforeDir="false" afterPath="$PROJECT_DIR$/modules/telegram/telegram.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/handlers.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

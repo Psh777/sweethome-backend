@@ -11,8 +11,8 @@ import (
 )
 
 func main() {
-
-	fmt.Println("SWEET HOME SERVER v.0.0.10")
+	ver := "v.0.0.10"
+	fmt.Println("SWEET HOME SERVER " + ver)
 
 	fmt.Println(time.Now())
 	fmt.Println(time.Now().UTC())
@@ -29,7 +29,7 @@ func main() {
 		panic(err)
 	}
 
-	go telegram.RunBot(myConfig)
+	go telegram.RunBot(myConfig, ver)
 
 	webserver.Init(myConfig)
 
