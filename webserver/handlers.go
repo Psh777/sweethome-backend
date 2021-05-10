@@ -81,7 +81,7 @@ func messageHandler(w http.ResponseWriter, r *http.Request) {
 		handlers.HandlerError(w, err.Error())
 		return
 	}
-	telegram.SendMsgBot("Message:" + t.Message)
+	telegram.SendMsgBot(t.Message)
 	handlers.HandlerInterface(w, "ok")
 }
 

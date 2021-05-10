@@ -31,7 +31,7 @@ func RunBot(myconfig types.MyConfig) {
 		return
 	}
 
-	SendMsgBot("Backend restart!")
+	SendMsgBot("Backend restart")
 
 	bot.Debug = false
 
