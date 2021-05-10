@@ -6,6 +6,7 @@ import (
 	"../class/sensor"
 	"../modules/telegram"
 	"./handlers"
+	"encoding/json"
 	"net/http"
 )
 
@@ -70,4 +71,20 @@ func securityAlarmHandler(w http.ResponseWriter, r *http.Request) {
 
 	telegram.SendMsgBot("ALARM! (" + sensortype + ") Zone: " + zone + "(" + zonename + ")")
 	handlers.HandlerInterface(w, "ok")
+}
+
+func messageHandler(w http.ResponseWriter, r *http.Request) {
+	d := json.NewDecoder(r.Body)
+	t := Message{}
+	err := d.Decode(&t)
+	if err != nil {
+		handlers.HandlerError(w, err.Error())
+		return
+	}
+	telegram.SendMsgBot("Message:" + t.Message)
+	handlers.HandlerInterface(w, "ok")
+}
+
+type Message struct {
+	Message string `json:"message"`
 }
