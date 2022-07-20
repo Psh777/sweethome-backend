@@ -1,9 +1,9 @@
 package sensor
 
 import (
-	"../../db/postgres"
-	"../../types"
-	"../../webserver/handlers"
+	"github.com/Psh777/sweethome-backend/db/postgres"
+	"github.com/Psh777/sweethome-backend/types"
+	"github.com/Psh777/sweethome-backend/webserver/handlers"
 	valid "github.com/asaskevich/govalidator"
 	"net/http"
 	"sort"

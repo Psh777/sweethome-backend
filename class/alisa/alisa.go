@@ -1,12 +1,12 @@
 package alisa
 
 import (
-	"../../modules/config"
-	"../../modules/http_request"
-	"../../webserver/handlers"
-	"../assistant"
 	"encoding/json"
 	"fmt"
+	"github.com/Psh777/sweethome-backend/class/assistant"
+	"github.com/Psh777/sweethome-backend/modules/config"
+	"github.com/Psh777/sweethome-backend/modules/http_request"
+	"github.com/Psh777/sweethome-backend/webserver/handlers"
 	"io/ioutil"
 	"net/http"
 )
@@ -55,7 +55,7 @@ func ParseJson(w http.ResponseWriter, r *http.Request) {
 	c := config.GetMyConfig()
 
 	jsonBody, _ := json.Marshal(body)
-	ansDialogFlowJson, err := http_request.POSTFLOW("https://dialogflow.googleapis.com/v2beta1", "projects/"+ c.Env.DialogFlowProjectID + "/agent/sessions/123456789:detectIntent", string(jsonBody))
+	ansDialogFlowJson, err := http_request.POSTFLOW("https://dialogflow.googleapis.com/v2beta1", "projects/"+c.Env.DialogFlowProjectID+"/agent/sessions/123456789:detectIntent", string(jsonBody))
 	if err != nil {
 		fmt.Println(err)
 		handlers.HandlerError(w, err.Error())

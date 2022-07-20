@@ -1,6 +1,6 @@
 package alisa
 
-import "../../types"
+import "github.com/Psh777/sweethome-backend/types"
 
 func CreateDevice(dbDevise types.DBDevice, caps []Capabilitie) Device {
 	return Device{

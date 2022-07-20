@@ -1,12 +1,12 @@
 package alisa
 
 import (
-	"../../db/postgres"
-	"../../webserver/handlers"
-	"../psh_devices"
-	"../sonoff"
 	"encoding/json"
 	"fmt"
+	"github.com/Psh777/sweethome-backend/class/psh_devices"
+	"github.com/Psh777/sweethome-backend/class/sonoff"
+	"github.com/Psh777/sweethome-backend/db/postgres"
+	"github.com/Psh777/sweethome-backend/webserver/handlers"
 	"io/ioutil"
 	"net/http"
 )

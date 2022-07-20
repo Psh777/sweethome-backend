@@ -1,12 +1,11 @@
 package security
 
 import (
-	"../../modules/config"
-	"../../modules/http_request"
 	"encoding/json"
 	"fmt"
+	"github.com/Psh777/sweethome-backend/modules/config"
+	"github.com/Psh777/sweethome-backend/modules/http_request"
 )
-
 
 // action
 

@@ -1,10 +1,10 @@
 package alisa
 
 import (
-	"../../db/postgres"
-	"../../webserver/handlers"
 	"encoding/json"
 	"fmt"
+	"github.com/Psh777/sweethome-backend/db/postgres"
+	"github.com/Psh777/sweethome-backend/webserver/handlers"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -107,8 +107,6 @@ func DeviceState(w http.ResponseWriter, r *http.Request) {
 					State: state,
 				})
 			}
-
-
 
 		}
 

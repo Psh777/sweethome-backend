@@ -1,9 +1,9 @@
 package alisa
 
 import (
-	"../../db/postgres"
-	"../../webserver/handlers"
 	"fmt"
+	"github.com/Psh777/sweethome-backend/db/postgres"
+	"github.com/Psh777/sweethome-backend/webserver/handlers"
 	"net/http"
 	"strconv"
 )
@@ -61,8 +61,8 @@ func Devices(w http.ResponseWriter, r *http.Request) {
 					Instance: "brightness",
 					Unit:     "unit.percent",
 					Range: Range{
-						Min: 0,
-						Max: 100,
+						Min:       0,
+						Max:       100,
 						Precision: 10,
 					},
 				}

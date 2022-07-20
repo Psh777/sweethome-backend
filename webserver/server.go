@@ -1,9 +1,9 @@
 package webserver
 
 import (
-	"../types"
-	"./handlers"
 	"fmt"
+	"github.com/Psh777/sweethome-backend/types"
+	"github.com/Psh777/sweethome-backend/webserver/handlers"
 	"github.com/bmizerany/pat"
 	"log"
 	"net/http"

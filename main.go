@@ -1,12 +1,12 @@
 package main
 
 import (
-	"./db/postgres"
-	"./modules/config"
-	"./modules/lang"
-	"./modules/telegram"
-	"./webserver"
 	"fmt"
+	"github.com/Psh777/sweethome-backend/db/postgres"
+	"github.com/Psh777/sweethome-backend/modules/config"
+	"github.com/Psh777/sweethome-backend/modules/lang"
+	"github.com/Psh777/sweethome-backend/modules/telegram"
+	"github.com/Psh777/sweethome-backend/webserver"
 	"time"
 )
 

@@ -1,9 +1,9 @@
 package psh_devices
 
 import (
-	"../../db/postgres"
-	"../../modules/http_request"
 	"fmt"
+	"github.com/Psh777/sweethome-backend/db/postgres"
+	"github.com/Psh777/sweethome-backend/modules/http_request"
 	"image/color"
 	"strconv"
 )
