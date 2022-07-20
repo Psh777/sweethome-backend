@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c34f30bb-22ff-4abf-a65c-0a2589ecad0b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4dc55a1a-4153-4c84-a73d-499575f1a8d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4dc55a1a-4153-4c84-a73d-499575f1a8d2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f9ac46dc-b3e4-44b6-a685-99ffa07790b8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f9ac46dc-b3e4-44b6-a685-99ffa07790b8.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c34f30bb-22ff-4abf-a65c-0a2589ecad0b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
