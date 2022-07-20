@@ -20,11 +20,10 @@ jobs:
             go-version: ${{ matrix.go-version }}
         - name: Golang Ext
           run: |
-            go version;
+            go version 1.14;
             export GO111MODULE=off;
             $GOPATH;
             env | grep -E "GO|PATH";
-            ls;
         - name: Ls
           run: ls
         - name: Go Deps
