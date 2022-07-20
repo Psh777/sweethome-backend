@@ -99,7 +99,7 @@ func RunBot(myconfig types.MyConfig, ver string) {
 
 		switch strings.ToLower(fraza[0]) {
 
-		case "sequrity":
+		case "s":
 
 			if fraza[1] == "on" {
 				result, _ := security.SetOn()
